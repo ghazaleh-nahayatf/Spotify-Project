@@ -8,6 +8,7 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         account.cpp \
+        artist.cpp \
         main.cpp
 
 TRANSLATIONS += \
@@ -21,4 +22,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    account.h
+    account.h \
+    artist.h
