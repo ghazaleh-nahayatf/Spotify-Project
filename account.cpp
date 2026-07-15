@@ -1,7 +1,7 @@
 #include "account.h"
 
 Account::Account(){}
-Account::Account(string fullName, string userName, string biography,string ID, string role,string password)
+Account::Account(string fullName, string userName, string biography,int ID, string role,string password)
     : fullName(fullName),
     userName(userName),
     biography(biography),

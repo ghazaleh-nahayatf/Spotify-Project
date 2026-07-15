@@ -10,7 +10,8 @@ SOURCES += \
         account.cpp \
         artist.cpp \
         listener.cpp \
-        main.cpp
+        main.cpp \
+        song.cpp
 
 TRANSLATIONS += \
     SpotifyProject_en_US.ts
@@ -25,4 +26,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     account.h \
     artist.h \
-    listener.h
+    listener.h \
+    song.h

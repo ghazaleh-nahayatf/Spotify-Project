@@ -8,7 +8,7 @@ Listener::Listener()
 Listener::Listener(string fullName,
                string userName,
                string biography,
-               string ID,
+               int ID,
                string role,
                string password)
     : Account(fullName,

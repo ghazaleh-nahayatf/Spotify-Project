@@ -12,7 +12,7 @@ public:
     Artist(string fullName,
            string userName,
            string biography,
-           string ID,
+           int ID,
            string role,
            string password);
 

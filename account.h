@@ -10,7 +10,7 @@ protected:
     string fullName;
     string userName;
     string biography;
-    string ID;
+    int ID;
     string role;
     string password;
 public:
@@ -18,7 +18,7 @@ public:
     Account(string fullName,
             string userName,
             string biography,
-            string ID,
+            int ID,
             string role,
             string password);
 

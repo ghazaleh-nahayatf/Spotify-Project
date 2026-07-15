@@ -1,7 +1,6 @@
 #ifndef LISTENER_H
 #define LISTENER_H
 #include "account.h"
-#include <iostream>
 
 using namespace std;
 
@@ -12,7 +11,7 @@ public:
     Listener(string fullName,
            string userName,
            string biography,
-           string ID,
+           int ID,
            string role,
            string password);
 
