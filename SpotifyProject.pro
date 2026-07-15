@@ -8,6 +8,7 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         account.cpp \
+        album.cpp \
         artist.cpp \
         listener.cpp \
         main.cpp \
@@ -25,6 +26,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     account.h \
+    album.h \
     artist.h \
     listener.h \
     song.h
