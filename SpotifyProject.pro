@@ -9,6 +9,7 @@ CONFIG += c++17 cmdline
 SOURCES += \
         account.cpp \
         artist.cpp \
+        listener.cpp \
         main.cpp
 
 TRANSLATIONS += \
@@ -23,4 +24,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     account.h \
-    artist.h
+    artist.h \
+    listener.h
