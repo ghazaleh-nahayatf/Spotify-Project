@@ -12,6 +12,7 @@ SOURCES += \
         artist.cpp \
         listener.cpp \
         main.cpp \
+        playlist.cpp \
         song.cpp
 
 TRANSLATIONS += \
@@ -29,4 +30,5 @@ HEADERS += \
     album.h \
     artist.h \
     listener.h \
+    playlist.h \
     song.h
