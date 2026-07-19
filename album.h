@@ -15,6 +15,11 @@ public:
           int albumId,
           int artistId);
 
+    string getAlbumName() const;
+    int getAlbumId() const;
+    int getArtistId() const;
+
+    void setAlbumId(int newId);
     virtual ~Album(){}
 };
 

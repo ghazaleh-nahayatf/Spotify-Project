@@ -9,6 +9,8 @@ CONFIG += c++17 cmdline
 SOURCES += \
         account.cpp \
         album.cpp \
+        albumfilemanger.cpp \
+        albumrepository.cpp \
         artist.cpp \
         listener.cpp \
         main.cpp \
@@ -31,6 +33,8 @@ HEADERS += \
     abstractrepository.h \
     account.h \
     album.h \
+    albumfilemanger.h \
+    albumrepository.h \
     artist.h \
     listener.h \
     playlist.h \

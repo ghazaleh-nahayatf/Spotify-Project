@@ -10,7 +10,7 @@ class SongRepository : public AbstractRepository <Song>
 {
 private:
     vector<Song> songs;
-    int nextTrackId;
+    int nextTrackId = 1;
 
 public:
     SongRepository();
