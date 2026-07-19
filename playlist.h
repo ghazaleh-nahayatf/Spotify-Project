@@ -15,7 +15,7 @@ public:
     Playlist(const string& playlistName,
              int playlistId,
              int listenerId);
-
+    int getPlaylistId();
     virtual ~Playlist(){}
 };
 

@@ -10,3 +10,7 @@ Playlist::Playlist(const string& playlistName,
     listenerId(listenerId)
 {
 }
+int Playlist::getPlaylistId()
+{
+    return playlistId;
+}

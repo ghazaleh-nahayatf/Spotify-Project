@@ -13,7 +13,9 @@ SOURCES += \
         listener.cpp \
         main.cpp \
         playlist.cpp \
-        song.cpp
+        song.cpp \
+        songfilemanager.cpp \
+        songrepository.cpp
 
 TRANSLATIONS += \
     SpotifyProject_en_US.ts
@@ -32,4 +34,6 @@ HEADERS += \
     artist.h \
     listener.h \
     playlist.h \
-    song.h
+    song.h \
+    songfilemanager.h \
+    songrepository.h

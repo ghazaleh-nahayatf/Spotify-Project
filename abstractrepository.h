@@ -6,7 +6,7 @@ template<typename T>
 class AbstractRepository
 {
 public:
-    AbstractRepository();
+    AbstractRepository() = default;
 
     virtual std::optional<int> save(const T& entity) = 0;
     virtual bool remove(int id) = 0;
