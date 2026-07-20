@@ -43,6 +43,10 @@ int Artist::getArtistId() const
 {
     return ID;
 }
+void Artist::setArtistId(int newId)
+{
+    this->ID = newId;
+}
 void Artist::showProfile()
 {
 

@@ -8,13 +8,12 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         account.cpp \
-        accountfilemanger.cpp \
-        accountrepository.cpp \
         album.cpp \
         albumfilemanger.cpp \
         albumrepository.cpp \
         artist.cpp \
         artistfilemanger.cpp \
+        artistrepository.cpp \
         listener.cpp \
         main.cpp \
         playlist.cpp \
@@ -37,13 +36,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     abstractrepository.h \
     account.h \
-    accountfilemanger.h \
     accountrepository.h \
     album.h \
     albumfilemanger.h \
     albumrepository.h \
     artist.h \
     artistfilemanger.h \
+    artistrepository.h \
     listener.h \
     playlist.h \
     playlistfilemanger.h \

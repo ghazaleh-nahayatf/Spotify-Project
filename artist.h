@@ -26,6 +26,8 @@ public:
     string getBiography() const;
     int getArtistId() const;
 
+    void setArtistId(int newId);
+
     virtual ~Artist(){}
 };
 

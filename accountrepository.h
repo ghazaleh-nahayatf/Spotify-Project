@@ -1,26 +1,15 @@
 #ifndef ACCOUNTREPOSITORY_H
 #define ACCOUNTREPOSITORY_H
 
-#include "abstractrepository.h"
 #include "account.h"
-#include <vector>
 #include <optional>
-
-class AccountRepository : public AbstractRepository<Account>
+class AccountRepository
 {
-private:
-    vector<Account> accounts;
-    int nextAccountId = 1 ;
 public:
-    AccountRepository();
+    virtual std::optional<Account> searchByUserName(
+        const string& username)=0;
 
-    optional<int> save(const Account& entity) override;
-
-    bool remove(int id) override;
-
-    optional<Account> search(int id) override;
-
-    virtual optional<Account> searchByUserName(const string& userName) = 0;
+    virtual ~AccountRepository()=default;
 };
 
 #endif // ACCOUNTREPOSITORY_H
