@@ -16,6 +16,7 @@ SOURCES += \
         artistrepository.cpp \
         listener.cpp \
         listenerfilemanger.cpp \
+        listenerrepository.cpp \
         main.cpp \
         playlist.cpp \
         playlistfilemanger.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     artistrepository.h \
     listener.h \
     listenerfilemanger.h \
+    listenerrepository.h \
     playlist.h \
     playlistfilemanger.h \
     playlistrepository.h \
