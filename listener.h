@@ -15,6 +15,16 @@ public:
            string role,
            string password);
 
+    string getUserName() const;
+    string getPassword() const;
+    string getFullName() const;
+    string getuserName() const;
+    string getRole() const;
+    string getBiography() const;
+    int getListenerId() const;
+
+    void setListenerId(int newId);
+
     void showProfile() override;
 
     virtual ~Listener(){}
