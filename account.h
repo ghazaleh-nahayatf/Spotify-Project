@@ -24,9 +24,16 @@ public:
 
     string getUserName() const;
     string getPassword() const;
+    string getFullName() const;
+    string getuserName() const;
+    string getRole() const;
+    string getBiography() const;
+    int getAccountId() const;
+
+    void setAccountId(int newId);
     void setBiography(const string& biography);
 
-    virtual void showProfile()=0;
+    virtual void showProfile();
     virtual ~Account(){}
 
 };

@@ -8,6 +8,8 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         account.cpp \
+        accountfilemanger.cpp \
+        accountrepository.cpp \
         album.cpp \
         albumfilemanger.cpp \
         albumrepository.cpp \
@@ -34,6 +36,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     abstractrepository.h \
     account.h \
+    accountfilemanger.h \
+    accountrepository.h \
     album.h \
     albumfilemanger.h \
     albumrepository.h \
