@@ -72,3 +72,34 @@ vector<Playlist> PlaylistRepository::getByListener(int listenerId)
 
     return result;
 }
+bool PlaylistRepository::addSong(int playlistId, int trackId)
+{
+    for (int i = 0; i < static_cast<int>(playlistSongs[playlistId].size()); i++)
+    {
+        if (playlistSongs[playlistId][i] == trackId)
+            return false;
+    }
+
+    playlistSongs[playlistId].push_back(trackId);
+
+    return true;
+}
+bool PlaylistRepository::removeSong(int playlistId, int trackId)
+{
+    if (!search(playlistId).has_value())
+        return false;
+    /*if (!songRepository.search(trackId).has_value())
+        return false;*/
+    for (int i = 0; i < static_cast<int>(playlistSongs[playlistId].size()); i++)
+    {
+        if (playlistSongs[playlistId][i] == trackId)
+        {
+            playlistSongs[playlistId].erase(
+                playlistSongs[playlistId].begin() + i);
+
+            return true;
+        }
+    }
+
+    return false;
+}

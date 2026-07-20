@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <optional>
+#include <map>
 
 #include "abstractrepository.h"
 #include "playlist.h"
@@ -12,6 +13,7 @@ class PlaylistRepository : public AbstractRepository<Playlist>
 {
 private:
     vector<Playlist> playlists;
+    map<int,vector<int>> playlistSongs;
     int nextPlaylistId = 1;
 
 public:
@@ -25,8 +27,7 @@ public:
 
     vector<Playlist> getByListener(int listenerId);
 
-    bool interSong(int playlistId, int trackId);
-
+    bool addSong(int playlistId, int trackId);
     bool removeSong(int playlistId, int trackId);
 };
 #endif // PLAYLISTREPOSITORY_H

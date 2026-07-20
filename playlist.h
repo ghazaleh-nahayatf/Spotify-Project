@@ -1,7 +1,7 @@
 #ifndef PLAYLIST_H
 #define PLAYLIST_H
 #include<iostream>
-
+#include<vector>
 using namespace std;
 
 class Playlist

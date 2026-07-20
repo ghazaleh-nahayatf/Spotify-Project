@@ -7,10 +7,10 @@ using namespace std;
 
 void PlaylistFileManager::save(const vector<Playlist>& playlists)
 {
-    ofstream file("albums.txt");
+    ofstream file("playlists.txt");
 
     if (!file.is_open())
-        throw runtime_error("Cannot open albums.txt");
+        throw runtime_error("Cannot open playlists.txt");
 
     for (int i = 0; i < static_cast<int>(playlists.size()); i++)
     {
@@ -26,7 +26,7 @@ vector<Playlist> PlaylistFileManager::load()
 {
     vector<Playlist> playlists;
 
-    ifstream file("albums.txt");
+    ifstream file("playlists.txt");
 
     if (!file.is_open())
         return playlists;
@@ -45,12 +45,12 @@ vector<Playlist> PlaylistFileManager::load()
         getline(ss, playlistId, '|');
         getline(ss, listenerId, '|');
 
-        Playlist album(
+        Playlist playlist(
             playlistName,
             stoi(playlistId),
             stoi(listenerId));
 
-        playlists.push_back(album);
+        playlists.push_back(playlist);
     }
 
     file.close();
