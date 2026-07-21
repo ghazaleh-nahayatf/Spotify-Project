@@ -21,8 +21,7 @@ public:
 
     std::optional<Artist> search(int id);
 
-    std::optional<Account> searchByUserName(
-        const std::string& username) override;
+    std::optional<Account> searchByUserName(const std::string& username) override;
 };
 
 #endif // ARTISTREPOSITORY_H

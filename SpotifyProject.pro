@@ -14,6 +14,7 @@ SOURCES += \
         artist.cpp \
         artistfilemanger.cpp \
         artistrepository.cpp \
+        entryservice.cpp \
         fileexception.cpp \
         listener.cpp \
         listenerfilemanger.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     artist.h \
     artistfilemanger.h \
     artistrepository.h \
+    entryservice.h \
     fileexception.h \
     listener.h \
     listenerfilemanger.h \

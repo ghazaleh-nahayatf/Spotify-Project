@@ -22,8 +22,7 @@ public:
 
     std::optional<Listener> search(int id);
 
-    std::optional<Account> searchByUserName(
-        const std::string& username) override;
+    std::optional<Account> searchByUserName(const std::string& username) override;
 
     bool updateLiked(int listenerId, int trackId, bool liked);
 
