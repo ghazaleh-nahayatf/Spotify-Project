@@ -1,11 +1,14 @@
 #ifndef LISTENER_H
 #define LISTENER_H
 #include "account.h"
+#include<vector>
 
 using namespace std;
 
 class Listener : public Account
 {
+private:
+    vector<int> likedSongs;
 public:
     Listener();
     Listener(string fullName,
@@ -24,6 +27,12 @@ public:
     int getListenerId() const;
 
     void setListenerId(int newId);
+
+    void updateLiked(int trackId, bool liked);
+
+    bool isLiked(int trackId) const;
+
+    const vector<int>& getLikedSongs() const;
 
     void showProfile() override;
 

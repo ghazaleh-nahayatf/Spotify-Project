@@ -4,9 +4,11 @@
 #include "listener.h"
 #include <vector>
 #include <optional>
+#include <map>
 
 class ListenerRepository : public AccountRepository
 {
+
 private:
     std::vector<Listener> listeners;
     int nextListenerId = 1;
@@ -22,6 +24,10 @@ public:
 
     std::optional<Account> searchByUserName(
         const std::string& username) override;
+
+    bool updateLiked(int listenerId, int trackId, bool liked);
+
+    bool isLiked(int listenerId, int trackId);
 };
 
 #endif // LISTENERREPOSITORY_H

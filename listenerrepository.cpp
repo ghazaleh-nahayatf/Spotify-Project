@@ -75,3 +75,28 @@ std::optional<Account> ListenerRepository::searchByUserName(
 
     return std::nullopt;
 }
+bool ListenerRepository::updateLiked(int listenerId,int trackId,bool liked)
+{
+    for (int i = 0; i < static_cast<int>(listeners.size()); i++)
+    {
+        if (listeners[i].getListenerId() == listenerId)
+        {
+            listeners[i].updateLiked(trackId, liked);
+
+            ListenerFileManager::save(listeners);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+bool ListenerRepository::isLiked(int listenerId,int trackId)
+{
+    for (int i = 0; i < static_cast<int>(listeners.size()); i++)
+    {
+        if(listeners[i].getListenerId() == listenerId)
+            return listeners[i].isLiked(trackId);
+    }
+    return false;
+}
