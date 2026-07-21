@@ -14,6 +14,7 @@ SOURCES += \
         artist.cpp \
         artistfilemanger.cpp \
         artistrepository.cpp \
+        fileexception.cpp \
         listener.cpp \
         listenerfilemanger.cpp \
         listenerrepository.cpp \
@@ -23,7 +24,8 @@ SOURCES += \
         playlistrepository.cpp \
         song.cpp \
         songfilemanager.cpp \
-        songrepository.cpp
+        songrepository.cpp \
+        spotifyexception.cpp
 
 TRANSLATIONS += \
     SpotifyProject_en_US.ts
@@ -45,6 +47,7 @@ HEADERS += \
     artist.h \
     artistfilemanger.h \
     artistrepository.h \
+    fileexception.h \
     listener.h \
     listenerfilemanger.h \
     listenerrepository.h \
@@ -53,4 +56,5 @@ HEADERS += \
     playlistrepository.h \
     song.h \
     songfilemanager.h \
-    songrepository.h
+    songrepository.h \
+    spotifyexception.h
