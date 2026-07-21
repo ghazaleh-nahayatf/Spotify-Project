@@ -1,5 +1,5 @@
 #include "playlistfilemanger.h"
-
+#include "fileexception.h"
 #include <fstream>
 #include <sstream>
 
@@ -10,7 +10,9 @@ void PlaylistFileManager::save(const vector<Playlist>& playlists)
     ofstream file("playlists.txt");
 
     if (!file.is_open())
-        throw runtime_error("Cannot open playlists.txt");
+    {
+        throw FileException("Cannot open playlists.txt");
+    }
 
     for (int i = 0; i < static_cast<int>(playlists.size()); i++)
     {

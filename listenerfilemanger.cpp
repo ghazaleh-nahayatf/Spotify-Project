@@ -1,5 +1,7 @@
 #include "listenerfilemanger.h"
 #include "listener.h"
+#include "fileexception.h"
+
 #include <fstream>
 #include <sstream>
 
@@ -10,7 +12,9 @@ void ListenerFileManager::save(const vector<Listener>& listeners)
     ofstream file("listeners.txt");
 
     if (!file.is_open())
-        throw runtime_error("Cannot open listeners.txt");
+    {
+        throw FileException("Cannot open listeners.txt");
+    }
 
     for (int i = 0; i < static_cast<int>(listeners.size()); i++)
     {

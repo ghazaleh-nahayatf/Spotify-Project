@@ -1,4 +1,6 @@
 #include "albumfilemanger.h"
+#include "fileexception.h"
+
 #include <fstream>
 #include <sstream>
 
@@ -9,7 +11,9 @@ void AlbumFileManager::save(const vector<Album>& albums)
     ofstream file("albums.txt");
 
     if (!file.is_open())
-        throw runtime_error("Cannot open albums.txt");
+    {
+        throw FileException("Cannot open albums.txt");
+    }
 
     for (int i = 0; i < static_cast<int>(albums.size()); i++)
     {

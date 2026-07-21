@@ -1,4 +1,5 @@
 #include "songfilemanager.h"
+#include "fileexception.h"
 #include <fstream>
 #include <sstream>
 
@@ -9,7 +10,9 @@ void SongFileManager::save(const vector<Song>& songs)
     ofstream file("songs.txt");
 
     if (!file.is_open())
-        throw runtime_error("Cannot open songs.txt");
+    {
+        throw FileException("Cannot open songs.txt");
+    }
 
     for (int i = 0; i < static_cast<int>(songs.size()); i++)
     {

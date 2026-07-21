@@ -1,5 +1,7 @@
 #include "artistfilemanger.h"
+#include "fileexception.h"
 #include "artist.h"
+
 #include <fstream>
 #include <sstream>
 
@@ -10,7 +12,9 @@ void ArtistFileManager::save(const vector<Artist>& artists)
     ofstream file("artists.txt");
 
     if (!file.is_open())
-        throw runtime_error("Cannot open artists.txt");
+    {
+        throw FileException("Cannot open artists.txt");
+    }
 
     for (int i = 0; i < static_cast<int>(artists.size()); i++)
     {
