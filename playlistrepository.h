@@ -28,6 +28,14 @@ public:
     vector<Playlist> getByListener(int listenerId);
 
     bool addSong(int playlistId, int trackId);
+
     bool removeSong(int playlistId, int trackId);
+
+    vector<int> getSongIds(int playlistId);
+
+    int getFavoritePlaylistId(int listenerId);
+
+    bool removeSongFromAllPlaylists(int trackId);
 };
+
 #endif // PLAYLISTREPOSITORY_H

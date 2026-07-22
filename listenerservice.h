@@ -3,6 +3,8 @@
 #include "listenerrepository.h"
 #include "playlistrepository.h"
 #include "songrepository.h"
+#include "artistrepository.h"
+#include "artist.h"
 
 class ListenerService
 {
@@ -10,11 +12,13 @@ private:
     ListenerRepository& listenerRepository;
     PlaylistRepository& playlistRepository;
     SongRepository& songRepository;
+    ArtistRepository& artistRepository;
 
 public:
     ListenerService(ListenerRepository& listenerRepository,
                     PlaylistRepository& playlistRepository,
-                    SongRepository& songRepository);
+                    SongRepository& songRepository,
+                    ArtistRepository& artistRepository);
 
     bool createPlaylist(const Playlist& playlist);
 
@@ -31,6 +35,10 @@ public:
     bool unlikeSong(int listenerId, int trackId);
 
     vector<Playlist> getPlaylists(int listenerId);
+
+    vector<Artist> getArtists();
+
+    vector<Song> getPlaylistSongs(int playlistId);
 };
 
 #endif // LISTENERSERVICE_H

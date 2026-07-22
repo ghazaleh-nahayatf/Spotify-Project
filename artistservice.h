@@ -35,6 +35,7 @@ public:
 
     vector<Song> getSingles(int artistId);
 
+
 };
 
 #endif // ARTISTSERVICE_H

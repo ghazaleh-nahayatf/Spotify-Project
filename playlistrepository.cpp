@@ -103,3 +103,43 @@ bool PlaylistRepository::removeSong(int playlistId, int trackId)
 
     return false;
 }
+int PlaylistRepository::getFavoritePlaylistId(int listenerId)
+{
+    for (int i = 0; i < static_cast<int>(playlists.size()); i++)
+    {
+        if (playlists[i].getListenerId() == listenerId &&
+            playlists[i].getPlaylistName() == "Favorites")
+        {
+            return playlists[i].getPlaylistId();
+        }
+    }
+
+    return -1;
+}
+vector<int> PlaylistRepository::getSongIds(int playlistId)
+{
+    return playlistSongs[playlistId];
+}
+bool PlaylistRepository::removeSongFromAllPlaylists(int trackId)
+{
+    bool removed = false;
+
+    for (int i = 0; i < static_cast<int>(playlists.size()); i++)
+    {
+        int playlistId = playlists[i].getPlaylistId();
+
+        for (int j = 0; j < static_cast<int>(playlistSongs[playlistId].size()); j++)
+        {
+            if (playlistSongs[playlistId][j] == trackId)
+            {
+                playlistSongs[playlistId].erase(
+                    playlistSongs[playlistId].begin() + j);
+
+                removed = true;
+                j--;
+            }
+        }
+    }
+
+    return removed;
+}

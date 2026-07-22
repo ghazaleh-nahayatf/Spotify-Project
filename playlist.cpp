@@ -26,3 +26,11 @@ void Playlist::setPlaylistId(int newId)
 {
     this->playlistId = newId;
 }
+void Playlist::setPlaylistName(string name)
+{
+    this->playlistName = name;
+}
+void Playlist::setListenerId(int newId)
+{
+    this->listenerId = newId;
+}

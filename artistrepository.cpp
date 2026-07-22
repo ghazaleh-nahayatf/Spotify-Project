@@ -75,3 +75,7 @@ std::optional<Account> ArtistRepository::searchByUserName(
 
     return std::nullopt;
 }
+vector<Artist> ArtistRepository::getAll()
+{
+    return artists;
+}

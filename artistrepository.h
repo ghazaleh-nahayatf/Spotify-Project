@@ -21,6 +21,8 @@ public:
 
     std::optional<Artist> search(int id);
 
+    vector<Artist> getAll();
+
     std::optional<Account> searchByUserName(const std::string& username) override;
 };
 

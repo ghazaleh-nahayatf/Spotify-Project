@@ -2,15 +2,19 @@
 #define ENTRYSERVICE_H
 #include "artistrepository.h"
 #include "listenerrepository.h"
+#include "playlistrepository.h"
 
 class EntryService
 {
 private:
     ArtistRepository& artistRepository;
     ListenerRepository& listenerRepository;
+    PlaylistRepository& playlistRepository;
 
 public:
-    EntryService(ArtistRepository& artistRepository,ListenerRepository& listenerRepository);
+    EntryService(ArtistRepository& artistRepository,
+                 ListenerRepository& listenerRepository,
+                 PlaylistRepository& playlistRepository);
 
     bool registerArtist(const Artist& artist);
     bool registerListener(const Listener& listener);

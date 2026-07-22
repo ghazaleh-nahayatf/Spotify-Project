@@ -21,7 +21,8 @@ public:
     int getListenerId() const;
 
     void setPlaylistId(int newId);
-
+    void setPlaylistName(string name);
+    void setListenerId(int newId);
     virtual ~Playlist(){}
 };
 
