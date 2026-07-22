@@ -1,6 +1,8 @@
 QT = core
 
 CONFIG += c++17 cmdline
+QT += core gui widgets
+QT += widgets
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -23,10 +25,12 @@ SOURCES += \
         listenerfilemanger.cpp \
         listenerrepository.cpp \
         listenerservice.cpp \
+        loginwindow.cpp \
         main.cpp \
         playlist.cpp \
         playlistfilemanger.cpp \
         playlistrepository.cpp \
+        registerwindow.cpp \
         song.cpp \
         songfilemanager.cpp \
         songrepository.cpp \
@@ -61,10 +65,16 @@ HEADERS += \
     listenerfilemanger.h \
     listenerrepository.h \
     listenerservice.h \
+    loginwindow.h \
     playlist.h \
     playlistfilemanger.h \
     playlistrepository.h \
+    registerwindow.h \
     song.h \
     songfilemanager.h \
     songrepository.h \
     spotifyexception.h
+
+FORMS += \
+    loginwindow.ui \
+    registerwindow.ui
