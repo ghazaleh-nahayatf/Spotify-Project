@@ -27,21 +27,3 @@ bool AccountService::editListener(const Listener& listener)
 
     return true;
 }
-bool AccountService::deleteArtist(int artistId)
-{
-    if (!artistRepository.search(artistId).has_value())
-        throw SpotifyException("Artist not found.");
-
-    artistRepository.remove(artistId);
-
-    return true;
-}
-bool AccountService::deleteListener(int listenerId)
-{
-    if (!listenerRepository.search(listenerId).has_value())
-        throw SpotifyException("Listener not found.");
-
-    listenerRepository.remove(listenerId);
-
-    return true;
-}

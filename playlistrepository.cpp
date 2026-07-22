@@ -40,11 +40,16 @@ bool PlaylistRepository::remove(int id)
     {
         if (playlists[i].getPlaylistId() == id)
         {
-            playlists.erase(playlists.begin() + i );
+            playlists.erase(playlists.begin() + i);
+
+            playlistSongs.erase(id);
+
             PlaylistFileManager::save(playlists);
+
             return true;
         }
     }
+
     return false;
 }
 optional<Playlist> PlaylistRepository::search(int id)
@@ -88,8 +93,7 @@ bool PlaylistRepository::removeSong(int playlistId, int trackId)
 {
     if (!search(playlistId).has_value())
         return false;
-    /*if (!songRepository.search(trackId).has_value())
-        return false;*/
+
     for (int i = 0; i < static_cast<int>(playlistSongs[playlistId].size()); i++)
     {
         if (playlistSongs[playlistId][i] == trackId)

@@ -100,3 +100,23 @@ bool ListenerRepository::isLiked(int listenerId,int trackId)
     }
     return false;
 }
+bool ListenerRepository::removeLikedSongFromAllListeners(int trackId)
+{
+    bool removed = false;
+
+    for (int i = 0; i < static_cast<int>(listeners.size()); i++)
+    {
+        if (listeners[i].isLiked(trackId))
+        {
+            listeners[i].updateLiked(trackId, false);
+            removed = true;
+        }
+    }
+
+    if (removed)
+    {
+        ListenerFileManager::save(listeners);
+    }
+
+    return removed;
+}

@@ -121,3 +121,19 @@ vector<Song> ListenerService::getPlaylistSongs(int playlistId)
 
     return songs;
 }
+bool ListenerService::deleteListener(int listenerId)
+{
+    if (!listenerRepository.search(listenerId).has_value())
+        throw SpotifyException("Listener not found.");
+
+    vector<Playlist> playlists = playlistRepository.getByListener(listenerId);
+
+    for (int i = 0; i < static_cast<int>(playlists.size()); i++)
+    {
+        playlistRepository.remove(playlists[i].getPlaylistId());
+    }
+
+    listenerRepository.remove(listenerId);
+
+    return true;
+}

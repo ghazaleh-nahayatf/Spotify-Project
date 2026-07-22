@@ -1,12 +1,17 @@
 #include "artistservice.h"
 #include "spotifyexception.h"
 
-ArtistService::ArtistService(ArtistRepository& artistRepository,
-                             SongRepository& songRepository,
-                             AlbumRepository& albumRepository)
+ArtistService::ArtistService(
+    ArtistRepository& artistRepository,
+    SongRepository& songRepository,
+    AlbumRepository& albumRepository,
+    PlaylistRepository& playlistRepository,
+    ListenerRepository& listenerRepository)
     : artistRepository(artistRepository),
     songRepository(songRepository),
-    albumRepository(albumRepository)
+    albumRepository(albumRepository),
+    playlistRepository(playlistRepository),
+    listenerRepository(listenerRepository)
 {
 }
 
@@ -79,6 +84,10 @@ bool ArtistService::deleteSong(int trackId)
     if (!song.has_value())
         throw SpotifyException("Song not found.");
 
+    listenerRepository.removeLikedSongFromAllListeners(trackId);
+
+    playlistRepository.removeSongFromAllPlaylists(trackId);
+
     songRepository.remove(trackId);
 
     return true;
@@ -94,7 +103,7 @@ bool ArtistService::deleteAlbum(int albumId)
 
     for (int i = 0; i < static_cast<int>(songs.size()); i++)
     {
-        songRepository.remove(songs[i].getTrackId());
+        deleteSong(songs[i].getTrackId());
     }
 
     albumRepository.remove(albumId);
@@ -112,4 +121,27 @@ vector<Song> ArtistService::getAlbumSongs(int albumId)
 vector<Song> ArtistService::getSingles(int artistId)
 {
     return songRepository.singleSongs(artistId);
+}
+bool ArtistService::deleteArtist(int artistId)
+{
+    if (!artistRepository.search(artistId).has_value())
+        throw SpotifyException("Artist not found.");
+
+    vector<Album> albums = albumRepository.getByArtist(artistId);
+
+    for (int i = 0; i < static_cast<int>(albums.size()); i++)
+    {
+        deleteAlbum(albums[i].getAlbumId());
+    }
+
+    vector<Song> singles = songRepository.singleSongs(artistId);
+
+    for (int i = 0; i < static_cast<int>(singles.size()); i++)
+    {
+        deleteSong(singles[i].getTrackId());
+    }
+
+    artistRepository.remove(artistId);
+
+    return true;
 }

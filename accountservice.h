@@ -18,9 +18,6 @@ public:
 
     bool editListener(const Listener& listener);
 
-    bool deleteArtist(int artistId);
-
-    bool deleteListener(int listenerId);
 };
 
 #endif // ACCOUNTSERVICE_H

@@ -24,6 +24,8 @@ public:
     vector<Artist> getAll();
 
     std::optional<Account> searchByUserName(const std::string& username) override;
+
+    bool deleteArtist(int artistId);
 };
 
 #endif // ARTISTREPOSITORY_H

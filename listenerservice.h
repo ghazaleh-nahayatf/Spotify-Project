@@ -39,6 +39,8 @@ public:
     vector<Artist> getArtists();
 
     vector<Song> getPlaylistSongs(int playlistId);
+
+    bool deleteListener(int listenerId);
 };
 
 #endif // LISTENERSERVICE_H
