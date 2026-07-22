@@ -30,6 +30,8 @@ public:
     vector<Song> getByPlaylist(int playlistId);
 
     vector<Song> getByLikedSongs(int listenerId);
+
+    vector<Song> getAll();
 };
 
 #endif // SONGREPOSITORY_H

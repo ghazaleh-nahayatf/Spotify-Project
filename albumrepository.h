@@ -23,6 +23,8 @@ public:
     optional<Album> search(int id) override;
 
     vector<Album> getByArtist(int artistId);
+
+    vector<Album> getAll();
 };
 
 #endif // ALBUMREPOSITORY_H

@@ -95,7 +95,10 @@ vector<Song> SongRepository::getByArtist(int artistId)
     return result;
 }
 
-
+vector<Song> SongRepository::getAll()
+{
+    return songs;
+}
 
 
 

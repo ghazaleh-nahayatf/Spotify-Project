@@ -71,3 +71,7 @@ vector<Album> AlbumRepository::getByArtist(int artistId)
     }
     return result;
 }
+vector<Album> AlbumRepository::getAll()
+{
+    return albums;
+}

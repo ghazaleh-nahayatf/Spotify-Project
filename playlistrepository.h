@@ -36,6 +36,8 @@ public:
     int getFavoritePlaylistId(int listenerId);
 
     bool removeSongFromAllPlaylists(int trackId);
+
+    vector<Playlist> getAll();
 };
 
 #endif // PLAYLISTREPOSITORY_H

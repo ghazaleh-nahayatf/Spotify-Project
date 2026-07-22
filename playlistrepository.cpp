@@ -143,3 +143,7 @@ bool PlaylistRepository::removeSongFromAllPlaylists(int trackId)
 
     return removed;
 }
+vector<Playlist> PlaylistRepository::getAll()
+{
+    return playlists;
+}
