@@ -7,7 +7,7 @@ using namespace std;
 
 void SongFileManager::save(const vector<Song>& songs)
 {
-    ofstream file("songs.txt");
+    ofstream file("C:/Users/Ghazaleh/Desktop/c++/Advanced/AP/project 2/files/songs.txt");
 
     if (!file.is_open())
     {
@@ -32,7 +32,7 @@ vector<Song> SongFileManager::load()
 {
     vector<Song> songs;
 
-    ifstream file("songs.txt");
+    ifstream file("C:/Users/Ghazaleh/Desktop/c++/Advanced/AP/project 2/files/songs.txt");
 
     if (!file.is_open())
         return songs;

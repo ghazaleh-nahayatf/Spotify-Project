@@ -8,7 +8,7 @@ using namespace std;
 
 void AlbumFileManager::save(const vector<Album>& albums)
 {
-    ofstream file("albums.txt");
+    ofstream file("C:/Users/Ghazaleh/Desktop/c++/Advanced/AP/project 2/files/albums.txt");
 
     if (!file.is_open())
     {
@@ -29,7 +29,7 @@ vector<Album> AlbumFileManager::load()
 {
     vector<Album> albums;
 
-    ifstream file("albums.txt");
+    ifstream file("C:/Users/Ghazaleh/Desktop/c++/Advanced/AP/project 2/files/albums.txt");
 
     if (!file.is_open())
         return albums;

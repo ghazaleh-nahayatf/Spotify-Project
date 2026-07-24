@@ -4,12 +4,11 @@
 
 #include <fstream>
 #include <sstream>
-
 using namespace std;
 
 void ArtistFileManager::save(const vector<Artist>& artists)
 {
-    ofstream file("artists.txt");
+    ofstream file("C:/Users/Ghazaleh/Desktop/c++/Advanced/AP/project 2/files/artists.txt");
 
     if (!file.is_open())
     {
@@ -33,7 +32,7 @@ vector<Artist> ArtistFileManager::load()
 {
     vector<Artist> artists;
 
-    ifstream file("artists.txt");
+    ifstream file("C:/Users/Ghazaleh/Desktop/c++/Advanced/AP/project 2/files/artists.txt");
 
     if (!file.is_open())
         return artists;

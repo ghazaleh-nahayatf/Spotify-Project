@@ -1,7 +1,7 @@
 #include "entryservice.h"
 #include "spotifyexception.h"
 #include "playlistrepository.h"
-
+#include<QDebug>
 EntryService::EntryService(
     ArtistRepository& artistRepository,
     ListenerRepository& listenerRepository,
@@ -17,11 +17,14 @@ bool EntryService::registerArtist(const Artist& artist)
     {
         throw SpotifyException("Username already exists.");
     }
+
     if (listenerRepository.searchByUserName(artist.getUserName()))
     {
         throw SpotifyException("Username already exists.");
     }
+
     artistRepository.save(artist);
+
     return true;
 }
 
@@ -31,14 +34,18 @@ bool EntryService::registerListener(const Listener& listener)
     {
         throw SpotifyException("Username already exists.");
     }
+
     if (listenerRepository.searchByUserName(listener.getUserName()))
     {
         throw SpotifyException("Username already exists.");
     }
-    listenerRepository.save(listener);
-    return true;
 
     std::optional<int> listenerId = listenerRepository.save(listener);
+
+    if (!listenerId.has_value())
+    {
+        throw SpotifyException("Could not create listener.");
+    }
 
     Playlist favorite;
     favorite.setPlaylistName("Favorites");

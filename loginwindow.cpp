@@ -2,20 +2,22 @@
 #include "ui_loginwindow.h"
 #include "registerwindow.h"
 
-LoginWindow::LoginWindow(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::LoginWindow)
+LoginWindow::LoginWindow(EntryService& entryService, QWidget *parent)
+    : QWidget(parent),
+    ui(new Ui::LoginWindow),
+    entryService(entryService)
 {
     ui->setupUi(this);
 }
 void LoginWindow::on_registerButton_clicked()
 {
-    RegisterWindow *registerWindow = new RegisterWindow();
+    RegisterWindow *window = new RegisterWindow(entryService);
 
-    registerWindow->show();
+    window->show();
 
-    this->close();
+    close();
 }
+
 
 LoginWindow::~LoginWindow()
 {

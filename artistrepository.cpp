@@ -1,6 +1,6 @@
 #include "artistrepository.h"
 #include "artistfilemanger.h"
-
+#include<QDebug>
 ArtistRepository::ArtistRepository()
 {
     artists = ArtistFileManager::load();
@@ -16,6 +16,7 @@ ArtistRepository::ArtistRepository()
 
 std::optional<int> ArtistRepository::save(const Artist& entity)
 {
+
     for (int i = 0; i < static_cast<int>(artists.size()); i++)
     {
         if (artists[i].getArtistId() == entity.getArtistId())
@@ -27,6 +28,7 @@ std::optional<int> ArtistRepository::save(const Artist& entity)
     }
 
     Artist newArtist = entity;
+
     newArtist.setArtistId(nextArtistId++);
 
     artists.push_back(newArtist);
