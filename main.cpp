@@ -16,12 +16,6 @@ int main(int argc, char *argv[])
     ListenerRepository listenerRepository;
     PlaylistRepository playlistRepository;
 
-   /* std::optional<Account> artist =
-        artistRepository.searchByUserName("abc");
-
-    std::optional<Account> listener =
-        listenerRepository.searchByUserName("abc");
-    */
     EntryService entryService(
         artistRepository,
         listenerRepository,
