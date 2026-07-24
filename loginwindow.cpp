@@ -2,6 +2,8 @@
 #include "ui_loginwindow.h"
 #include "registerwindow.h"
 #include "spotifyexception.h"
+#include "artistwindow.h"
+#include "listenerwindow.h"
 #include <QMessageBox>
 
 LoginWindow::LoginWindow(EntryService& entryService, QWidget *parent)
@@ -35,10 +37,18 @@ void LoginWindow::on_loginButton_clicked()
         if(account.getRole() == "Artist")
         {
             QMessageBox::information(this, "Artist", "Welcome Artist");
+            ArtistWindow *artistWindow = new ArtistWindow();
+            artistWindow->show();
+
+            this->close();
         }
         else if(account.getRole() == "Listener")
         {
             QMessageBox::information(this, "Listener",  "Welcome Listener");
+            ListenerWindow *window = new ListenerWindow();
+            window->show();
+
+            this->close();
         }
 
         close();
