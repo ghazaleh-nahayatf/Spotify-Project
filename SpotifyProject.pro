@@ -18,6 +18,7 @@ SOURCES += \
         artistfilemanger.cpp \
         artistrepository.cpp \
         artistservice.cpp \
+        artistwindow.cpp \
         commonservice.cpp \
         entryservice.cpp \
         fileexception.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
         listenerfilemanger.cpp \
         listenerrepository.cpp \
         listenerservice.cpp \
+        listenerwindow.cpp \
         loginwindow.cpp \
         main.cpp \
         playlist.cpp \
@@ -58,6 +60,7 @@ HEADERS += \
     artistfilemanger.h \
     artistrepository.h \
     artistservice.h \
+    artistwindow.h \
     commonservice.h \
     entryservice.h \
     fileexception.h \
@@ -65,6 +68,7 @@ HEADERS += \
     listenerfilemanger.h \
     listenerrepository.h \
     listenerservice.h \
+    listenerwindow.h \
     loginwindow.h \
     playlist.h \
     playlistfilemanger.h \
@@ -76,5 +80,7 @@ HEADERS += \
     spotifyexception.h
 
 FORMS += \
+    artistwindow.ui \
+    listenerwindow.ui \
     loginwindow.ui \
     registerwindow.ui
