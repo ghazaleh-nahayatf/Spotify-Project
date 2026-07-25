@@ -170,7 +170,14 @@ void ArtistWindow::on_createSongButton_clicked()
         currentAccount.getAccountId(),
         this);
 
-    dialog.exec();
+    if(dialog.exec() == QDialog::Accepted)
+    {
+        if(ui->listWidget->currentItem() != nullptr)
+        {
+            on_listWidget_itemClicked(
+                ui->listWidget->currentItem());
+        }
+    }
 }
 
 
@@ -209,12 +216,103 @@ void ArtistWindow::on_playButton_clicked()
 
 void ArtistWindow::on_pauseButton_clicked()
 {
+    if(ui->songsListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Please select a song.");
+        return;
+    }
      player->pause();
 }
 
 
 void ArtistWindow::on_stopButton_clicked()
 {
+    if(ui->songsListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Please select a song.");
+        return;
+    }
     player->stop();
+}
+
+
+void ArtistWindow::on_editSongButton_clicked()
+{
+    if(ui->songsListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Please select a song.");
+
+        return;
+    }
+
+    int trackId =
+        ui->songsListWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    Song song =
+        artistService.getSong(trackId);
+
+    CreateSongWindow dialog(
+        artistService,
+        currentAccount.getAccountId(),
+        song,
+        this);
+
+    if(dialog.exec() == QDialog::Accepted)
+    {
+        on_listWidget_itemClicked(
+            ui->listWidget->currentItem());
+    }
+}
+
+
+void ArtistWindow::on_editAlbumButton_clicked()
+{
+    if(ui->listWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Please select an album.");
+
+        return;
+    }
+
+    int albumId =
+        ui->listWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    if(albumId == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Singles cannot be edited.");
+
+        return;
+    }
+
+    Album album = artistService.getAlbum(albumId);
+
+    CreateAlbumWindow dialog(
+        artistService,
+        currentAccount.getAccountId(),
+        album,
+        this);
+
+    if(dialog.exec() == QDialog::Accepted)
+    {
+        loadAlbums();
+    }
+}
+
+
+void ArtistWindow::on_deleteSongButton_clicked()
+{
+
 }
 

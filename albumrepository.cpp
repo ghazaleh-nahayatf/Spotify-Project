@@ -88,3 +88,21 @@ optional<Album> AlbumRepository::searchByName(const string& albumName, int artis
 
     return {};
 }
+
+bool AlbumRepository::update(const Album& entity)
+{
+    for(int i = 0; i < static_cast<int>(albums.size()); i++)
+    {
+        if(albums[i].getAlbumId() == entity.getAlbumId())
+        {
+            albums[i] = entity;
+
+            AlbumFileManager fileManager;
+            fileManager.save(albums);
+
+            return true;
+        }
+    }
+
+    return false;
+}

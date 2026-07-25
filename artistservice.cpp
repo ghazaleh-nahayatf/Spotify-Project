@@ -59,31 +59,19 @@ bool ArtistService::createSong(const Song& song)
 
 bool ArtistService::editAlbum(const Album& album)
 {
-    std::optional<Album> oldAlbum = albumRepository.search(album.getAlbumId());
-
-    if (!oldAlbum.has_value())
+    if(!albumRepository.update(album))
+    {
         throw SpotifyException("Album not found.");
-
-    albumRepository.save(album);
+    }
 
     return true;
 }
 bool ArtistService::editSong(const Song& song)
 {
-    std::optional<Song> oldSong = songRepository.search(song.getTrackId());
-
-    if (!oldSong.has_value())
-        throw SpotifyException("Song not found.");
-
-    if (song.getAlbumId() != 0)
+    if(!songRepository.update(song))
     {
-        std::optional<Album> album = albumRepository.search(song.getAlbumId());
-
-        if (!album.has_value())
-            throw SpotifyException("Album not found.");
+        throw SpotifyException("Song not found.");
     }
-
-    songRepository.save(song);
 
     return true;
 }
@@ -163,4 +151,14 @@ Song ArtistService::getSong(int trackId)
         throw SpotifyException("Song not found.");
 
     return song.value();
+}
+Album ArtistService::getAlbum(int albumId)
+{
+    std::optional<Album> album =
+        albumRepository.search(albumId);
+
+    if(!album.has_value())
+        throw SpotifyException("Album not found.");
+
+    return album.value();
 }

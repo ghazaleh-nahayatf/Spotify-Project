@@ -33,6 +33,8 @@ public:
 
     bool existsInAlbum(const string& songName, int albumId);
 
+    bool update(const Song& entity) override;
+
     vector<Song> getAll();
 };
 

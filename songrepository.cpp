@@ -110,9 +110,23 @@ vector<Song> SongRepository::getAll()
 {
     return songs;
 }
+bool SongRepository::update(const Song& song)
+{
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        if(songs[i].getTrackId() == song.getTrackId())
+        {
+            songs[i] = song;
 
+            SongFileManager fileManager;
+            fileManager.save(songs);
 
+            return true;
+        }
+    }
 
+    return false;
+}
 
 
 

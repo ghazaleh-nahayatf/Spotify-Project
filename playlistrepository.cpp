@@ -151,3 +151,20 @@ vector<Playlist> PlaylistRepository::getAll()
 {
     return playlists;
 }
+bool PlaylistRepository::update(const Playlist& entity)
+{
+    for(int i = 0; i < static_cast<int>(playlists.size()); i++)
+    {
+        if(playlists[i].getPlaylistId() == entity.getPlaylistId())
+        {
+            playlists[i] = entity;
+
+            PlaylistFileManager fileManager;
+            fileManager.save(playlists);
+
+            return true;
+        }
+    }
+
+    return false;
+}

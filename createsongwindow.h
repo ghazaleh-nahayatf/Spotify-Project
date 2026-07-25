@@ -16,6 +16,10 @@ public:
         ArtistService &artistService,
         int artistId,
         QWidget *parent = nullptr);
+    CreateSongWindow(ArtistService& artistService,
+                     int artistId,
+                     const Song& song,
+                     QWidget *parent = nullptr);
     ~CreateSongWindow();
 
 private slots:
@@ -33,6 +37,11 @@ private:
     int artistId;
 
     void loadAlbums();
+
+    Song currentSong;
+
+     bool editMode = false;
+
 };
 
 #endif // CREATESONGWINDOW_H

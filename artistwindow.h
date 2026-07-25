@@ -38,6 +38,10 @@ private slots:
 
     void on_stopButton_clicked();
 
+    void on_editSongButton_clicked();
+
+    void on_editAlbumButton_clicked();
+
 private:
     Ui::ArtistWindow *ui;
     QMediaPlayer *player;

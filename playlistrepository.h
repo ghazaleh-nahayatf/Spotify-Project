@@ -38,6 +38,8 @@ public:
     bool removeSongFromAllPlaylists(int trackId);
 
     vector<Playlist> getAll();
+
+    bool update(const Playlist& entity) override;
 };
 
 #endif // PLAYLISTREPOSITORY_H

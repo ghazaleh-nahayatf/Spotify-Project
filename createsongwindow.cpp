@@ -17,6 +17,40 @@ CreateSongWindow::CreateSongWindow(
 
     loadAlbums();
 }
+CreateSongWindow::CreateSongWindow(
+    ArtistService& artistService,
+    int artistId,
+    const Song& song,
+    QWidget *parent)
+    : QDialog(parent),
+    ui(new Ui::CreateSongWindow),
+    artistService(artistService),
+    artistId(artistId),
+    currentSong(song),
+    editMode(true)
+{
+    ui->setupUi(this);
+
+    loadAlbums();
+
+    ui->songNameLineEdit->setText(
+        QString::fromStdString(song.getName()));
+
+    ui->releaseYearSpinBox->setValue(
+        song.getReleaseYear());
+
+    ui->genreComboBox->setCurrentText(
+        QString::fromStdString(song.getGenre()));
+
+    ui->filePathLineEdit->setText(
+        QString::fromStdString(song.getFilePath()));
+
+    ui->albumComboBox->setCurrentIndex(
+        ui->albumComboBox->findData(song.getAlbumId()));
+
+    ui->createButton->setText("Save");
+}
+
 void CreateSongWindow::loadAlbums()
 {
     ui->albumComboBox->clear();
@@ -75,9 +109,18 @@ void CreateSongWindow::on_createButton_clicked()
             artistId,
             albumId);
 
-        artistService.createSong(song);
+        if(editMode)
+        {
+            song.setTrackId(currentSong.getTrackId());
 
-        QMessageBox::information(this, "Success", "Song created successfully.");
+            artistService.editSong(song);
+        }
+        else
+        {
+            artistService.createSong(song);
+        }
+
+        QMessageBox::information(this, "Success", "Song saved successfully.");
 
         accept();
     }

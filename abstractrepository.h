@@ -12,6 +12,8 @@ public:
     virtual bool remove(int id) = 0;
     virtual std::optional<T> search(int id) = 0;
 
+    virtual bool update(const T& entity) = 0;
+
     virtual ~AbstractRepository(){}
 };
 

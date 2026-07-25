@@ -14,6 +14,10 @@ class CreateAlbumWindow : public QDialog
 
 public:
     explicit CreateAlbumWindow(ArtistService &artistService,int artistId, QWidget *parent = nullptr);
+    CreateAlbumWindow(ArtistService& artistService,
+                      int artistId,
+                      const Album& album,
+                      QWidget *parent = nullptr);
     ~CreateAlbumWindow();
 
 private slots:
@@ -25,6 +29,8 @@ private:
     Ui::CreateAlbumWindow *ui;
     ArtistService &artistService;
     int artistId;
+    Album currentAlbum;
+    bool editMode;
 };
 
 #endif // CREATEALBUMWINDOW_H

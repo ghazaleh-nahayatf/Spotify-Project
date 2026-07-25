@@ -45,6 +45,8 @@ public:
 
     Song getSong(int trackId);
 
+    Album getAlbum(int albumId);
+
 };
 
 #endif // ARTISTSERVICE_H

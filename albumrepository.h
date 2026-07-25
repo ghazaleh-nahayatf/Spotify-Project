@@ -27,6 +27,8 @@ public:
     vector<Album> getAll();
 
     optional<Album> searchByName(const string& albumName, int artistId);
+
+    bool update(const Album& entity) override;
 };
 
 #endif // ALBUMREPOSITORY_H

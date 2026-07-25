@@ -14,7 +14,25 @@ CreateAlbumWindow::CreateAlbumWindow(ArtistService &artistService,
 {
     ui->setupUi(this);
 }
+CreateAlbumWindow::CreateAlbumWindow(
+    ArtistService& artistService,
+    int artistId,
+    const Album& album,
+    QWidget *parent)
+    : QDialog(parent),
+    ui(new Ui::CreateAlbumWindow),
+    artistService(artistService),
+    artistId(artistId),
+    currentAlbum(album),
+    editMode(true)
+{
+    ui->setupUi(this);
 
+    ui->albumNameLineEdit->setText(
+        QString::fromStdString(album.getAlbumName()));
+
+    ui->createAlbumButton->setText("Save");
+}
 CreateAlbumWindow::~CreateAlbumWindow()
 {
     delete ui;
@@ -46,11 +64,20 @@ void CreateAlbumWindow::on_createAlbumButton_clicked()
             0,
             artistId);
 
-        artistService.createAlbum(album);
+        if(editMode)
+        {
+            album.setAlbumId(currentAlbum.getAlbumId());
+
+            artistService.editAlbum(album);
+        }
+        else
+        {
+            artistService.createAlbum(album);
+        }
 
         QMessageBox::information(this,
                                  "Success",
-                                 "Album created successfully.");
+                                 "Album saved successfully.");
 
         accept();
     }
