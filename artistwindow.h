@@ -22,6 +22,8 @@ public:
 private slots:
     void on_createAlbumButton_clicked();
 
+    void on_deleteAlbumButton_clicked();
+
 private:
     Ui::ArtistWindow *ui;
 
