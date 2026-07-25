@@ -10,13 +10,15 @@ Artist::Artist(string fullName,
                string biography,
                int ID,
                string role,
-               string password)
+               string password,
+               string profilePhotoPath)
     : Account(fullName,
               userName,
               biography,
               ID,
               role,
-              password)
+              password,
+              profilePhotoPath)
 {
 }
 string Artist :: getUserName()const

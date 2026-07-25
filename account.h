@@ -13,6 +13,7 @@ protected:
     int ID;
     string role;
     string password;
+    string profilePhotoPath;
 public:
     Account();
     Account(string fullName,
@@ -20,7 +21,8 @@ public:
             string biography,
             int ID,
             string role,
-            string password);
+            string password,
+            string profilePhotoPath = "");
 
     string getUserName() const;
     string getPassword() const;
@@ -28,7 +30,9 @@ public:
     string getRole() const;
     string getBiography() const;
     int getAccountId() const;
+    string getProfilePhotoPath() const;
 
+    void setProfilePhotoPath(const string& path);
     void setAccountId(int newId);
     void setBiography(const string& biography);
 

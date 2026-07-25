@@ -23,7 +23,8 @@ void ListenerFileManager::save(const vector<Listener>& listeners)
              << listeners[i].getUserName() << '|'
              << listeners[i].getPassword() << '|'
              << listeners[i].getBiography() << '|'
-             << listeners[i].getRole() << '|';
+             << listeners[i].getRole() << '|'
+             << listeners[i].getProfilePhotoPath() <<'\n';
 
         const vector<int>& liked = listeners[i].getLikedSongs();
 
@@ -62,6 +63,7 @@ vector<Listener> ListenerFileManager::load()
         string biography;
         string ID;
         string likedSongs;
+        string profilePhotoPath;
 
         getline(ss, ID, '|');
         getline(ss, fullName, '|');
@@ -70,6 +72,7 @@ vector<Listener> ListenerFileManager::load()
         getline(ss, biography, '|');
         getline(ss, role, '|');
         getline(ss, likedSongs, '|');
+        getline(ss, profilePhotoPath);
 
         Listener listener(
             fullName,
@@ -77,7 +80,8 @@ vector<Listener> ListenerFileManager::load()
             biography,
             stoi(ID),
             role,
-            password);
+            password,
+            profilePhotoPath);
 
         stringstream likedStream(likedSongs);
 

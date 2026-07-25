@@ -2,13 +2,20 @@
 #include<iostream>
 
 Account::Account(){}
-Account::Account(string fullName, string userName, string biography,int ID, string role,string password)
+Account::Account(string fullName,
+                 string userName,
+                 string biography,
+                 int ID,
+                 string role,
+                 string password,
+                 string profilePhotoPath)
     : fullName(fullName),
     userName(userName),
     biography(biography),
     ID(ID),
     role(role),
-    password(password)
+    password(password),
+    profilePhotoPath(profilePhotoPath)
 {
 }
 
@@ -35,6 +42,15 @@ string Account :: getBiography()const
 int Account::getAccountId() const
 {
     return ID;
+}
+string Account::getProfilePhotoPath() const
+{
+    return profilePhotoPath;
+}
+
+void Account::setProfilePhotoPath(const string &path)
+{
+    profilePhotoPath = path;
 }
 void Account::setAccountId(int newId)
 {

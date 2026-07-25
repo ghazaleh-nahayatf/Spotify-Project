@@ -313,6 +313,48 @@ void ArtistWindow::on_editAlbumButton_clicked()
 
 void ArtistWindow::on_deleteSongButton_clicked()
 {
+    if(ui->songsListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Please select a song.");
+        return;
+    }
 
+    QMessageBox::StandardButton reply;
+
+    reply = QMessageBox::question(
+        this,
+        "Delete Song",
+        "Are you sure?",
+        QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::No)
+        return;
+
+    int trackId =
+        ui->songsListWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    try
+    {
+        artistService.deleteSong(trackId);
+
+        QMessageBox::information(this,
+                                 "Success",
+                                 "Song deleted successfully.");
+
+        if(ui->listWidget->currentItem() != nullptr)
+        {
+            on_listWidget_itemClicked(
+                ui->listWidget->currentItem());
+        }
+    }
+    catch(const SpotifyException& ex)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             ex.what());
+    }
 }
 

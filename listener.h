@@ -16,7 +16,8 @@ public:
            string biography,
            int ID,
            string role,
-           string password);
+           string password,
+           string profilePhotoPath = "");
 
     string getUserName() const;
     string getPassword() const;

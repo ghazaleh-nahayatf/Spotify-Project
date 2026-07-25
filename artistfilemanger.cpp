@@ -22,8 +22,8 @@ void ArtistFileManager::save(const vector<Artist>& artists)
              << artists[i].getUserName() << '|'
              << artists[i].getPassword() << '|'
              << artists[i].getBiography() << '|'
-             << artists[i].getRole()
-             << '\n';
+             << artists[i].getRole() <<'|'
+             << artists[i].getProfilePhotoPath() <<'\n';
     }
 
     file.close();
@@ -49,6 +49,7 @@ vector<Artist> ArtistFileManager::load()
         string role;
         string biography;
         string ID;
+        string profilePhotoPath;
 
         getline(ss, ID, '|');
         getline(ss, fullName, '|');
@@ -56,6 +57,7 @@ vector<Artist> ArtistFileManager::load()
         getline(ss, password, '|');
         getline(ss, biography, '|');
         getline(ss, role, '|');
+        getline(ss, profilePhotoPath);
 
         Artist artist(
             fullName,
@@ -63,7 +65,8 @@ vector<Artist> ArtistFileManager::load()
             biography,
             stoi(ID),
             role,
-            password);
+            password,
+            profilePhotoPath);
 
         artists.push_back(artist);
     }

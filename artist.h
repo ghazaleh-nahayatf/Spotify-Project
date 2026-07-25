@@ -14,7 +14,8 @@ public:
            string biography,
            int ID,
            string role,
-           string password);
+           string password,
+           string profilePhotoPath = "");
 
     void showProfile() override;
 
