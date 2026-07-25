@@ -162,3 +162,34 @@ Album ArtistService::getAlbum(int albumId)
 
     return album.value();
 }
+bool ArtistService::editProfile(const Artist& artist)
+{
+    std::optional<Artist> oldArtist =
+        artistRepository.search(artist.getArtistId());
+
+    if(!oldArtist.has_value())
+        throw SpotifyException("Artist not found.");
+
+    std::optional<Account> account =
+        artistRepository.searchByUserName(artist.getUserName());
+
+    if(account.has_value() &&
+        account->getAccountId() != artist.getArtistId())
+    {
+        throw SpotifyException("Username already exists.");
+    }
+
+    artistRepository.update(artist);
+
+    return true;
+}
+Artist ArtistService::getArtist(int artistId)
+{
+    std::optional<Artist> artist =
+        artistRepository.search(artistId);
+
+    if(!artist.has_value())
+        throw SpotifyException("Artist not found.");
+
+    return artist.value();
+}

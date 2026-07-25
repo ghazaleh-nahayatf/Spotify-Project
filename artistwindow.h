@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "account.h"
 #include "artistservice.h"
+#include "entryservice.h"
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QListWidgetItem>
@@ -19,7 +20,8 @@ class ArtistWindow : public QWidget
 
 public:
    explicit ArtistWindow(const Account &account,
-                          ArtistService &artistService,
+                          EntryService& entryService,
+                          ArtistService& artistService,
                           QWidget *parent = nullptr);
     ~ArtistWindow();
 
@@ -44,12 +46,17 @@ private slots:
 
     void on_deleteSongButton_clicked();
 
+    void on_editProfileButton_clicked();
+
+    void on_logoutButton_clicked();
+
 private:
     Ui::ArtistWindow *ui;
     QMediaPlayer *player;
     QAudioOutput *audioOutput;
 
     Account currentAccount;
+    EntryService& entryService;
     ArtistService &artistService;
     void loadAlbums();
     void loadSongs(int albumId);

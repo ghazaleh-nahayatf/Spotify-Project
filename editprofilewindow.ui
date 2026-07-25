@@ -7,95 +7,108 @@
     <x>0</x>
     <y>0</y>
     <width>505</width>
-    <height>300</height>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Full Name </string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QLineEdit" name="fullNameEditLine"/>
-   </item>
-   <item row="0" column="4">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Password </string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="6" colspan="2">
-    <widget class="QLineEdit" name="lineEdit"/>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Username  </string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1" colspan="2">
-    <widget class="QLineEdit" name="usernameLineEdit"/>
-   </item>
-   <item row="1" column="3" colspan="3">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Confirm Password </string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="6" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_2"/>
+    <widget class="QLineEdit" name="passwordLineEdit"/>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Biography</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="2">
-    <widget class="QTextEdit" name="biographyTextEdit"/>
-   </item>
-   <item row="2" column="3" colspan="2">
+   <item row="3" column="3" colspan="2">
     <widget class="QLabel" name="label_6">
      <property name="text">
       <string>Profile Photo</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="5" colspan="2">
-    <widget class="QLineEdit" name="profileLineEdit">
-     <property name="readOnly">
-      <bool>true</bool>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="fullNameLineEdit"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Username  </string>
      </property>
     </widget>
    </item>
-   <item row="2" column="7">
+   <item row="3" column="7">
     <widget class="QPushButton" name="browseButton">
      <property name="text">
       <string>Browse</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Biography</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Full Name </string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3" colspan="3">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Confirm Password </string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="5" colspan="2">
+    <widget class="QLineEdit" name="profileLineEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QPushButton" name="cancelButton">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Password </string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="QLineEdit" name="usernameLineEdit"/>
+   </item>
+   <item row="2" column="6" colspan="2">
+    <widget class="QLineEdit" name="confirmPasswordLineEdit"/>
+   </item>
+   <item row="4" column="1">
     <widget class="QPushButton" name="saveButton">
      <property name="text">
       <string>Save</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="2" colspan="2">
-    <widget class="QPushButton" name="cancelButton">
+   <item row="3" column="1" colspan="2">
+    <widget class="QTextEdit" name="biographyTextEdit"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="photoLabel">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>80</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Cancel</string>
+      <string>Photo</string>
      </property>
     </widget>
    </item>

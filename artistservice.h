@@ -47,6 +47,10 @@ public:
 
     Album getAlbum(int albumId);
 
+    bool editProfile(const Artist& artist);
+
+    Artist getArtist(int artistId);
+
 };
 
 #endif // ARTISTSERVICE_H

@@ -41,7 +41,7 @@ void LoginWindow::on_loginButton_clicked()
         if(account.getRole() == "Artist")
         {
             QMessageBox::information(this, "Artist", "Welcome Artist");
-            ArtistWindow *window = new ArtistWindow(account, artistService);
+            ArtistWindow *window =new ArtistWindow(account, entryService,artistService);
             window->show();
 
             this->close();

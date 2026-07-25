@@ -81,3 +81,20 @@ vector<Artist> ArtistRepository::getAll()
 {
     return artists;
 }
+bool ArtistRepository::update(const Artist& entity)
+{
+    for(int i = 0; i < static_cast<int>(artists.size()); i++)
+    {
+        if(artists[i].getArtistId() == entity.getArtistId())
+        {
+            artists[i] = entity;
+
+            ArtistFileManager fileManager;
+            fileManager.save(artists);
+
+            return true;
+        }
+    }
+
+    return false;
+}

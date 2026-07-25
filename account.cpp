@@ -47,7 +47,20 @@ string Account::getProfilePhotoPath() const
 {
     return profilePhotoPath;
 }
+void Account::setFullName(const string &name)
+{
+    fullName = name;
+}
 
+void Account::setUserName(const string &username)
+{
+    userName = username;
+}
+
+void Account::setPassword(const string &password)
+{
+    this->password = password;
+}
 void Account::setProfilePhotoPath(const string &path)
 {
     profilePhotoPath = path;

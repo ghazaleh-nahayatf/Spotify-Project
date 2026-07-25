@@ -1,17 +1,24 @@
 #include "artistwindow.h"
 #include "ui_artistwindow.h"
+#include "loginwindow.h"
 #include "createalbumwindow.h"
 #include "spotifyexception.h"
 #include "createsongwindow.h"
-#include<QMessageBox>
+#include "editprofilewindow.h"
+#include "loginwindow.h"
+#include <QMessageBox>
+#include <QDialog>
+#include <QPixmap>
 #include <QUrl>
 
 ArtistWindow::ArtistWindow(const Account &account,
+                           EntryService &entryService,
                            ArtistService &artistService,
                            QWidget *parent)
     : QWidget(parent),
     ui(new Ui::ArtistWindow),
     currentAccount(account),
+    entryService(entryService),
     artistService(artistService)
 {
     ui->setupUi(this);
@@ -24,6 +31,19 @@ ArtistWindow::ArtistWindow(const Account &account,
     player = new QMediaPlayer(this);
 
     player->setAudioOutput(audioOutput);
+
+    QString photoPath =
+        QString::fromStdString(
+            currentAccount.getProfilePhotoPath());
+
+    if(!photoPath.isEmpty())
+    {
+        ui->profilePhotoLabel->setPixmap(
+            QPixmap(photoPath).scaled(
+                ui->profilePhotoLabel->size(),
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation));
+    }
 }
 void ArtistWindow::on_createAlbumButton_clicked()
 {
@@ -356,5 +376,62 @@ void ArtistWindow::on_deleteSongButton_clicked()
                              "Error",
                              ex.what());
     }
+}
+
+
+void ArtistWindow::on_editProfileButton_clicked()
+{
+        Artist artist =
+            artistService.getArtist(currentAccount.getAccountId());
+
+        EditProfileWindow dialog(
+            artistService,
+            artist,
+            this);
+
+        if(dialog.exec() == QDialog::Accepted)
+        {
+            currentAccount = artistService.getArtist(currentAccount.getAccountId());
+
+            QString photoPath =
+                QString::fromStdString(
+                    currentAccount.getProfilePhotoPath());
+
+            if(!photoPath.isEmpty())
+            {
+                ui->profilePhotoLabel->setPixmap(
+                    QPixmap(photoPath).scaled(
+                        ui->profilePhotoLabel->size(),
+                        Qt::KeepAspectRatio,
+                        Qt::SmoothTransformation));
+            }
+
+            ui->artistPanelLabel->setText(
+                QString::fromStdString(
+                    "Welcome, " +
+                    currentAccount.getFullName()));
+        }
+}
+
+
+void ArtistWindow::on_logoutButton_clicked()
+{
+    QMessageBox::StandardButton reply;
+
+    reply = QMessageBox::question(
+        this,
+        "Log Out",
+        "Are you sure you want to log out?",
+        QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::No)
+        return;
+
+    LoginWindow *window =
+        new LoginWindow(entryService,artistService);
+
+    window->show();
+
+    close();
 }
 

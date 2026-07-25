@@ -26,6 +26,8 @@ public:
     std::optional<Account> searchByUserName(const std::string& username) override;
 
     bool deleteArtist(int artistId);
+
+    bool update(const Artist& entity);
 };
 
 #endif // ARTISTREPOSITORY_H

@@ -35,6 +35,9 @@ public:
     void setProfilePhotoPath(const string& path);
     void setAccountId(int newId);
     void setBiography(const string& biography);
+    void setFullName(const string& name);
+    void setUserName(const string& username);
+    void setPassword(const string& password);
 
     virtual void showProfile();
     virtual ~Account(){}

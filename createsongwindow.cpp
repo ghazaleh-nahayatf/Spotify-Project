@@ -133,16 +133,22 @@ void CreateSongWindow::on_createButton_clicked()
 
 void CreateSongWindow::on_browseButton_clicked()
 {
-    QString filePath =
+    QString path =
         QFileDialog::getOpenFileName(
             this,
-            "Select Song",
+            "Choose Song",
             "",
-            "Audio Files (*.mp3 *.wav *.ogg)");
+            "Audio Files (*.mp3 *.wav *.flac *.ogg)");
 
-    if(filePath.isEmpty())
+    if(path.isEmpty())
         return;
 
-    ui->filePathLineEdit->setText(filePath);
+    ui->filePathLineEdit->setText(path);
+}
+
+
+void CreateSongWindow::on_CreateSongWindow_accepted()
+{
+
 }
 
