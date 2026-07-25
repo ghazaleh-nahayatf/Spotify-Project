@@ -41,6 +41,12 @@ public:
     vector<Song> getPlaylistSongs(int playlistId);
 
     bool deleteListener(int listenerId);
+
+    bool isLiked(int listenerId, int trackId);
+
+    vector<Song> getAllSongs();
+
+    Song getSong(int trackId);
 };
 
 #endif // LISTENERSERVICE_H

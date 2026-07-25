@@ -137,3 +137,20 @@ bool ListenerService::deleteListener(int listenerId)
 
     return true;
 }
+bool ListenerService::isLiked(int listenerId, int trackId)
+{
+    return listenerRepository.isLiked(listenerId, trackId);
+}
+vector<Song> ListenerService::getAllSongs()
+{
+    return songRepository.getAll();
+}
+Song ListenerService::getSong(int trackId)
+{
+    std::optional<Song> song = songRepository.search(trackId);
+
+    if(!song.has_value())
+        throw SpotifyException("Song not found.");
+
+    return song.value();
+}

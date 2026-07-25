@@ -8,17 +8,19 @@
 
 RegisterWindow::RegisterWindow(EntryService& entryService,
                                ArtistService& artistService,
+                               ListenerService& listenerService,
                                QWidget *parent)
     : QWidget(parent),
     ui(new Ui::RegisterWindow),
     entryService(entryService),
-    artistService(artistService)
+    artistService(artistService),
+    listenerService(listenerService)
 {
     ui->setupUi(this);
 }
 void RegisterWindow::on_backButton_clicked()
 {
-    LoginWindow *window = new LoginWindow(entryService, artistService);
+    LoginWindow *window = new LoginWindow(entryService, artistService,listenerService);
 
     window->show();
 
@@ -75,7 +77,7 @@ void RegisterWindow::on_registerButton_clicked()
 
        QMessageBox::information(this,"Success", "Registration completed successfully.");
 
-        LoginWindow *login = new LoginWindow(entryService, artistService);
+        LoginWindow *login = new LoginWindow(entryService, artistService,listenerService);
 
         login->show();
 

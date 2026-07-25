@@ -8,6 +8,7 @@
 
 #include "entryservice.h"
 #include "artistservice.h"
+#include "listenerservice.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,12 +27,18 @@ int main(int argc, char *argv[])
         playlistRepository,
         listenerRepository);
 
+    ListenerService listenerService(
+        listenerRepository,
+        playlistRepository,
+        songRepository,
+        artistRepository);
+
     EntryService entryService(
         artistRepository,
         listenerRepository,
         playlistRepository);
 
-    LoginWindow window(entryService, artistService);
+    LoginWindow window(entryService, artistService,listenerService);
 
     window.show();
 

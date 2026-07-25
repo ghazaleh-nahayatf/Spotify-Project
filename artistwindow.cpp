@@ -14,12 +14,14 @@
 ArtistWindow::ArtistWindow(const Account &account,
                            EntryService &entryService,
                            ArtistService &artistService,
+                           ListenerService& listenerService,
                            QWidget *parent)
     : QWidget(parent),
     ui(new Ui::ArtistWindow),
     currentAccount(account),
     entryService(entryService),
-    artistService(artistService)
+    artistService(artistService),
+    listenerService(listenerService)
 {
     ui->setupUi(this);
 
@@ -427,8 +429,7 @@ void ArtistWindow::on_logoutButton_clicked()
     if(reply == QMessageBox::No)
         return;
 
-    LoginWindow *window =
-        new LoginWindow(entryService,artistService);
+    LoginWindow *window = new LoginWindow(entryService,artistService, listenerService);
 
     window->show();
 

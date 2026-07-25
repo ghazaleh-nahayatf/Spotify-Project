@@ -5,6 +5,7 @@
 #include "account.h"
 #include "artistservice.h"
 #include "entryservice.h"
+#include "listenerservice.h"
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QListWidgetItem>
@@ -22,6 +23,7 @@ public:
    explicit ArtistWindow(const Account &account,
                           EntryService& entryService,
                           ArtistService& artistService,
+                          ListenerService& listenerService,
                           QWidget *parent = nullptr);
     ~ArtistWindow();
 
@@ -57,7 +59,8 @@ private:
 
     Account currentAccount;
     EntryService& entryService;
-    ArtistService &artistService;
+    ArtistService& artistService;
+    ListenerService& listenerService;
     void loadAlbums();
     void loadSongs(int albumId);
     void loadSingles();

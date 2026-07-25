@@ -3,6 +3,7 @@
 #include <QWidget>
 #include "entryservice.h"
 #include "artistservice.h"
+#include "listenerservice.h"
 
 namespace Ui {
 class LoginWindow;
@@ -15,6 +16,7 @@ class LoginWindow : public QWidget
 public:
     LoginWindow(EntryService& entryService,
                 ArtistService& artistService,
+                ListenerService& listenerService,
                 QWidget *parent = nullptr);
     ~LoginWindow();
 
@@ -26,6 +28,7 @@ private:
     Ui::LoginWindow *ui;
     EntryService& entryService;
     ArtistService& artistService;
+    ListenerService& listenerService;
 };
 
 #endif // LOGINWINDOW_H

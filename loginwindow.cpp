@@ -8,11 +8,13 @@
 
 LoginWindow::LoginWindow(EntryService& entryService,
                          ArtistService& artistService,
+                         ListenerService& listenerService,
                          QWidget *parent)
     : QWidget(parent),
     ui(new Ui::LoginWindow),
     entryService(entryService),
-    artistService(artistService)
+    artistService(artistService),
+    listenerService(listenerService)
 {
     ui->setupUi(this);
 }
@@ -41,7 +43,7 @@ void LoginWindow::on_loginButton_clicked()
         if(account.getRole() == "Artist")
         {
             QMessageBox::information(this, "Artist", "Welcome Artist");
-            ArtistWindow *window =new ArtistWindow(account, entryService,artistService);
+            ArtistWindow *window =new ArtistWindow(account, entryService,artistService, listenerService);
             window->show();
 
             this->close();
@@ -49,6 +51,10 @@ void LoginWindow::on_loginButton_clicked()
         else if(account.getRole() == "Listener")
         {
             QMessageBox::information(this, "Listener",  "Welcome Listener");
+           ListenerWindow *window =new ListenerWindow(account, entryService,listenerService);
+            window->show();
+
+            this->close();
 
         }
 
@@ -65,7 +71,7 @@ void LoginWindow::on_loginButton_clicked()
 }
 void LoginWindow::on_registerButton_clicked()
 {
-    RegisterWindow *window = new RegisterWindow(entryService, artistService);
+    RegisterWindow *window = new RegisterWindow(entryService, artistService, listenerService);
 
     window->show();
 
