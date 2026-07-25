@@ -34,8 +34,7 @@ bool ArtistService::createAlbum(const Album& album)
 }
 bool ArtistService::createSong(const Song& song)
 {
-    std::optional<Artist> artist =
-        artistRepository.search(song.getArtistId());
+    std::optional<Artist> artist = artistRepository.search(song.getArtistId());
 
     if (!artist.has_value())
         throw SpotifyException("Artist not found.");
@@ -46,6 +45,11 @@ bool ArtistService::createSong(const Song& song)
 
         if (!album.has_value())
             throw SpotifyException("Album not found.");
+    }
+    if(songRepository.existsInAlbum(song.getName(),
+                                     song.getAlbumId()))
+    {
+        throw SpotifyException( "A song with this name already exists in this album.");
     }
 
     songRepository.save(song);
@@ -150,4 +154,13 @@ bool ArtistService::deleteArtist(int artistId)
     artistRepository.remove(artistId);
 
     return true;
+}
+Song ArtistService::getSong(int trackId)
+{
+    std::optional<Song> song = songRepository.search(trackId);
+
+    if(!song.has_value())
+        throw SpotifyException("Song not found.");
+
+    return song.value();
 }

@@ -31,6 +31,8 @@ public:
 
     vector<Song> getByLikedSongs(int listenerId);
 
+    bool existsInAlbum(const string& songName, int albumId);
+
     vector<Song> getAll();
 };
 

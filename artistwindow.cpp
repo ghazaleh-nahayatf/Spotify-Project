@@ -2,8 +2,9 @@
 #include "ui_artistwindow.h"
 #include "createalbumwindow.h"
 #include "spotifyexception.h"
-
+#include "createsongwindow.h"
 #include<QMessageBox>
+#include <QUrl>
 
 ArtistWindow::ArtistWindow(const Account &account,
                            ArtistService &artistService,
@@ -18,6 +19,11 @@ ArtistWindow::ArtistWindow(const Account &account,
     ui->artistPanelLabel->setText(
         QString::fromStdString("Welcome, " + currentAccount.getFullName()));
     loadAlbums();
+    audioOutput = new QAudioOutput(this);
+
+    player = new QMediaPlayer(this);
+
+    player->setAudioOutput(audioOutput);
 }
 void ArtistWindow::on_createAlbumButton_clicked()
 {
@@ -28,12 +34,22 @@ void ArtistWindow::on_createAlbumButton_clicked()
 
     if(dialog.exec() == QDialog::Accepted)
     {
-        loadAlbums();
+        if(ui->listWidget->currentItem() != nullptr)
+        {
+            on_listWidget_itemClicked(ui->listWidget->currentItem());
+        }
     }
 }
 void ArtistWindow::loadAlbums()
 {
     ui->listWidget->clear();
+
+    QListWidgetItem *singlesItem =
+        new QListWidgetItem("🎵 Singles");
+
+    singlesItem->setData(Qt::UserRole, -1);
+
+    ui->listWidget->addItem(singlesItem);
 
     std::vector<Album> albums = artistService.getAlbums(currentAccount.getAccountId());
 
@@ -45,6 +61,25 @@ void ArtistWindow::loadAlbums()
         item->setData(Qt::UserRole, albums[i].getAlbumId());
 
         ui->listWidget->addItem(item);
+    }
+}
+void ArtistWindow::loadSingles()
+{
+    ui->songsListWidget->clear();
+
+    vector<Song> songs =
+        artistService.getSingles(currentAccount.getAccountId());
+
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        QListWidgetItem *item =
+            new QListWidgetItem(
+                QString::fromStdString(songs[i].getName()));
+
+        item->setData(Qt::UserRole,
+                      songs[i].getTrackId());
+
+        ui->songsListWidget->addItem(item);
     }
 }
 ArtistWindow::~ArtistWindow()
@@ -92,5 +127,94 @@ void ArtistWindow::on_deleteAlbumButton_clicked()
                              "Error",
                              ex.what());
     }
+}
+
+void ArtistWindow::loadSongs(int albumId)
+{
+    ui->songsListWidget->clear();
+
+    vector<Song> songs =
+        artistService.getAlbumSongs(albumId);
+
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        QListWidgetItem *item =
+            new QListWidgetItem(
+                QString::fromStdString(songs[i].getName()));
+
+        item->setData(Qt::UserRole,
+                      songs[i].getTrackId());
+
+        ui->songsListWidget->addItem(item);
+    }
+}
+void ArtistWindow::on_listWidget_itemClicked(QListWidgetItem *item)
+{
+    int albumId = item->data(Qt::UserRole).toInt();
+
+    if(albumId == -1)
+    {
+        loadSingles();
+    }
+    else
+    {
+        loadSongs(albumId);
+    }
+}
+
+
+void ArtistWindow::on_createSongButton_clicked()
+{
+    CreateSongWindow dialog(
+        artistService,
+        currentAccount.getAccountId(),
+        this);
+
+    dialog.exec();
+}
+
+
+void ArtistWindow::on_playButton_clicked()
+{
+    if(ui->songsListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Please select a song.");
+        return;
+    }
+
+    QListWidgetItem *item = ui->songsListWidget->currentItem();
+
+    int trackId = item->data(Qt::UserRole).toInt();
+
+    try
+    {
+        Song song = artistService.getSong(trackId);
+
+        player->setSource(
+            QUrl::fromLocalFile(
+                QString::fromStdString(song.getFilePath())));
+
+        player->play();
+    }
+    catch(const SpotifyException &ex)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             ex.what());
+    }
+}
+
+
+void ArtistWindow::on_pauseButton_clicked()
+{
+     player->pause();
+}
+
+
+void ArtistWindow::on_stopButton_clicked()
+{
+    player->stop();
 }
 

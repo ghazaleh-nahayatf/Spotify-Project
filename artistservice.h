@@ -43,6 +43,8 @@ public:
 
     bool deleteArtist(int artistId);
 
+    Song getSong(int trackId);
+
 };
 
 #endif // ARTISTSERVICE_H

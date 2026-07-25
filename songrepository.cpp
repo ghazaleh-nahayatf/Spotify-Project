@@ -94,7 +94,18 @@ vector<Song> SongRepository::getByArtist(int artistId)
     }
     return result;
 }
+bool SongRepository::existsInAlbum(const string& songName, int albumId)
+{
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        if(songs[i].getAlbumId() == albumId && songs[i].getName() == songName)
+        {
+            return true;
+        }
+    }
 
+    return false;
+}
 vector<Song> SongRepository::getAll()
 {
     return songs;

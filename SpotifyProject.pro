@@ -3,7 +3,7 @@ QT = core
 CONFIG += c++17 cmdline
 QT += core gui widgets
 QT += widgets
-
+QT += multimedia
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -21,6 +21,7 @@ SOURCES += \
         artistwindow.cpp \
         commonservice.cpp \
         createalbumwindow.cpp \
+        createsongwindow.cpp \
         entryservice.cpp \
         fileexception.cpp \
         listener.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
     artistwindow.h \
     commonservice.h \
     createalbumwindow.h \
+    createsongwindow.h \
     entryservice.h \
     fileexception.h \
     listener.h \
@@ -84,6 +86,7 @@ HEADERS += \
 FORMS += \
     artistwindow.ui \
     createalbumwindow.ui \
+    createsongwindow.ui \
     listenerwindow.ui \
     loginwindow.ui \
     registerwindow.ui
