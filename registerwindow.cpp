@@ -5,16 +5,20 @@
 #include "spotifyexception.h"
 
 #include <QMessageBox>
-RegisterWindow::RegisterWindow(EntryService& entryService, QWidget *parent)
+
+RegisterWindow::RegisterWindow(EntryService& entryService,
+                               ArtistService& artistService,
+                               QWidget *parent)
     : QWidget(parent),
     ui(new Ui::RegisterWindow),
-    entryService(entryService)
+    entryService(entryService),
+    artistService(artistService)
 {
     ui->setupUi(this);
 }
 void RegisterWindow::on_backButton_clicked()
 {
-    LoginWindow *window = new LoginWindow(entryService);
+    LoginWindow *window = new LoginWindow(entryService, artistService);
 
     window->show();
 
@@ -71,7 +75,7 @@ void RegisterWindow::on_registerButton_clicked()
 
        QMessageBox::information(this,"Success", "Registration completed successfully.");
 
-        LoginWindow *login = new LoginWindow(entryService);
+        LoginWindow *login = new LoginWindow(entryService, artistService);
 
         login->show();
 

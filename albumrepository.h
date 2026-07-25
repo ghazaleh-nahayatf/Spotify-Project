@@ -25,6 +25,8 @@ public:
     vector<Album> getByArtist(int artistId);
 
     vector<Album> getAll();
+
+    optional<Album> searchByName(const string& albumName, int artistId);
 };
 
 #endif // ALBUMREPOSITORY_H

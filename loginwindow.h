@@ -2,6 +2,7 @@
 #define LOGINWINDOW_H
 #include <QWidget>
 #include "entryservice.h"
+#include "artistservice.h"
 
 namespace Ui {
 class LoginWindow;
@@ -12,7 +13,9 @@ class LoginWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit LoginWindow(EntryService& entryService, QWidget *parent = nullptr);
+    LoginWindow(EntryService& entryService,
+                ArtistService& artistService,
+                QWidget *parent = nullptr);
     ~LoginWindow();
 
 private slots:
@@ -22,6 +25,7 @@ private slots:
 private:
     Ui::LoginWindow *ui;
     EntryService& entryService;
+    ArtistService& artistService;
 };
 
 #endif // LOGINWINDOW_H

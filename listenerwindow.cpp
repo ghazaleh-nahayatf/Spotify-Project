@@ -12,9 +12,3 @@ ListenerWindow::~ListenerWindow()
 {
     delete ui;
 }
-
-void ListenerWindow::on_createAlbumButton_clicked()
-{
-
-}
-

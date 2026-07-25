@@ -6,13 +6,17 @@
 #include "listenerwindow.h"
 #include <QMessageBox>
 
-LoginWindow::LoginWindow(EntryService& entryService, QWidget *parent)
+LoginWindow::LoginWindow(EntryService& entryService,
+                         ArtistService& artistService,
+                         QWidget *parent)
     : QWidget(parent),
     ui(new Ui::LoginWindow),
-    entryService(entryService)
+    entryService(entryService),
+    artistService(artistService)
 {
     ui->setupUi(this);
 }
+
 void LoginWindow::on_loginButton_clicked()
 {
     QString username = ui->usernameLineEdit->text().trimmed();
@@ -37,18 +41,15 @@ void LoginWindow::on_loginButton_clicked()
         if(account.getRole() == "Artist")
         {
             QMessageBox::information(this, "Artist", "Welcome Artist");
-            ArtistWindow *artistWindow = new ArtistWindow();
-            artistWindow->show();
+            ArtistWindow *window = new ArtistWindow(account, artistService);
+            window->show();
 
             this->close();
         }
         else if(account.getRole() == "Listener")
         {
             QMessageBox::information(this, "Listener",  "Welcome Listener");
-            ListenerWindow *window = new ListenerWindow();
-            window->show();
 
-            this->close();
         }
 
         close();
@@ -64,7 +65,7 @@ void LoginWindow::on_loginButton_clicked()
 }
 void LoginWindow::on_registerButton_clicked()
 {
-    RegisterWindow *window = new RegisterWindow(entryService);
+    RegisterWindow *window = new RegisterWindow(entryService, artistService);
 
     window->show();
 

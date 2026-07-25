@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>379</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>200</y>
+     <y>260</y>
      <width>120</width>
      <height>24</height>
     </rect>
@@ -26,11 +26,11 @@
     <string>Delete Song</string>
    </property>
   </widget>
-  <widget class="QLabel" name="artistPanekLabel">
+  <widget class="QLabel" name="artistPanelLabel">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>26</y>
+     <x>10</x>
+     <y>0</y>
      <width>256</width>
      <height>18</height>
     </rect>
@@ -42,8 +42,8 @@
   <widget class="QPushButton" name="logoutButton">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>230</y>
+     <x>10</x>
+     <y>300</y>
      <width>125</width>
      <height>24</height>
     </rect>
@@ -56,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>80</y>
+     <y>110</y>
      <width>120</width>
      <height>24</height>
     </rect>
@@ -69,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>140</y>
+     <y>200</y>
      <width>120</width>
      <height>24</height>
     </rect>
@@ -82,7 +82,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>110</y>
+     <y>140</y>
      <width>120</width>
      <height>24</height>
     </rect>
@@ -94,10 +94,10 @@
   <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>50</y>
+     <x>10</x>
+     <y>83</y>
      <width>256</width>
-     <height>174</height>
+     <height>201</height>
     </rect>
    </property>
   </widget>
@@ -105,7 +105,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>50</y>
+     <y>80</y>
      <width>120</width>
      <height>24</height>
     </rect>
@@ -117,8 +117,8 @@
   <widget class="QPushButton" name="editProfileButton">
    <property name="geometry">
     <rect>
-     <x>139</x>
-     <y>230</y>
+     <x>150</x>
+     <y>300</y>
      <width>125</width>
      <height>24</height>
     </rect>
@@ -131,13 +131,39 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>170</y>
+     <y>230</y>
      <width>120</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
     <string>Edit Song</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>231</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Manage your albums and songs</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>49</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Albums</string>
    </property>
   </widget>
  </widget>

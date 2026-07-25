@@ -15,9 +15,6 @@ public:
     explicit ListenerWindow(QWidget *parent = nullptr);
     ~ListenerWindow();
 
-private slots:
-    void on_createAlbumButton_clicked();
-
 private:
     Ui::ListenerWindow *ui;
 };

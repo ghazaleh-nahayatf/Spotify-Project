@@ -75,3 +75,16 @@ vector<Album> AlbumRepository::getAll()
 {
     return albums;
 }
+optional<Album> AlbumRepository::searchByName(const string& albumName, int artistId)
+{
+    for(int i = 0; i < static_cast<int>(albums.size()); i++)
+    {
+        if(albums[i].getAlbumName() == albumName &&
+            albums[i].getArtistId() == artistId)
+        {
+            return albums[i];
+        }
+    }
+
+    return {};
+}

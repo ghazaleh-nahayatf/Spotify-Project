@@ -1,6 +1,7 @@
 #ifndef REGISTERWINDOW_H
 #define REGISTERWINDOW_H
 #include "entryservice.h"
+#include "artistservice.h"
 #include <QWidget>
 
 namespace Ui {
@@ -12,7 +13,7 @@ class RegisterWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit RegisterWindow(EntryService& entryService, QWidget *parent = nullptr);
+    explicit RegisterWindow(EntryService& entryService,ArtistService& artistService , QWidget *parent = nullptr);
     ~RegisterWindow();
 
 private slots:
@@ -23,6 +24,7 @@ private:
     Ui::RegisterWindow *ui;
 
     EntryService& entryService;
+    ArtistService& artistService;
 };
 
 #endif // REGISTERWINDOW_H

@@ -17,10 +17,16 @@ ArtistService::ArtistService(
 
 bool ArtistService::createAlbum(const Album& album)
 {
-    std::optional<Artist> artist = artistRepository.search(album.getArtistId());
+    optional<Artist> artist = artistRepository.search(album.getArtistId());
 
-    if (!artist.has_value())
+    if(!artist.has_value())
         throw SpotifyException("Artist not found.");
+
+    if(albumRepository.searchByName(album.getAlbumName(),
+                                     album.getArtistId()).has_value())
+    {
+        throw SpotifyException("Album name already exists.");
+    }
 
     albumRepository.save(album);
 
