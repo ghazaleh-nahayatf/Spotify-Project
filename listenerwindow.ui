@@ -6,14 +6,132 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>246</height>
+    <width>431</width>
+    <height>509</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Spotify _ Listener</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout"/>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="8" column="0" rowspan="2" colspan="3">
+    <widget class="QListWidget" name="songsListWidget"/>
+   </item>
+   <item row="0" column="0" rowspan="3" colspan="2">
+    <widget class="QLabel" name="profilePhotoLabel">
+     <property name="text">
+      <string>Photo</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="3" rowspan="4">
+    <widget class="QListWidget" name="playlistSongsListWidget"/>
+   </item>
+   <item row="9" column="3" rowspan="2">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Songs in playlist</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0" rowspan="2" colspan="2">
+    <widget class="QPushButton" name="playButton">
+     <property name="text">
+      <string>▶️</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3" rowspan="2">
+    <widget class="QPushButton" name="deletePlaylistButton">
+     <property name="text">
+      <string>Delete Playlist</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QPushButton" name="editProfileButton">
+     <property name="text">
+      <string>Edit Profile</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="3">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Playlist</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Songs</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2" rowspan="2">
+    <widget class="QPushButton" name="logoutButton">
+     <property name="text">
+      <string>Log Out</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3" rowspan="3">
+    <widget class="QListWidget" name="playlistListWidget"/>
+   </item>
+   <item row="12" column="0" colspan="2">
+    <widget class="QPushButton" name="pauseButton">
+     <property name="text">
+      <string>⏸</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="createPlaylistButton">
+     <property name="text">
+      <string>Create Playlist</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0" colspan="2">
+    <widget class="QPushButton" name="stopButton">
+     <property name="text">
+      <string>⏹</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" rowspan="2" colspan="2">
+    <widget class="QLabel" name="listenerPanelLabel">
+     <property name="text">
+      <string>Welcome , Listener</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="renamePlaylistButton">
+     <property name="text">
+      <string>Rename Playlist</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0" colspan="2">
+    <widget class="QPushButton" name="likeButton">
+     <property name="text">
+      <string>👍</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="searchLineEdit"/>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
