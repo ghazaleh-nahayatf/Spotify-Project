@@ -21,6 +21,7 @@ SOURCES += \
         artistwindow.cpp \
         commonservice.cpp \
         createalbumwindow.cpp \
+        createplaylistwindow.cpp \
         createsongwindow.cpp \
         editprofilewindow.cpp \
         entryservice.cpp \
@@ -66,6 +67,7 @@ HEADERS += \
     artistwindow.h \
     commonservice.h \
     createalbumwindow.h \
+    createplaylistwindow.h \
     createsongwindow.h \
     editprofilewindow.h \
     entryservice.h \
@@ -88,6 +90,7 @@ HEADERS += \
 FORMS += \
     artistwindow.ui \
     createalbumwindow.ui \
+    createplaylistwindow.ui \
     createsongwindow.ui \
     editprofilewindow.ui \
     listenerwindow.ui \

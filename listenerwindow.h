@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QListWidgetItem>
 #include "listenerservice.h"
 #include "entryservice.h"
 
@@ -18,6 +19,7 @@ class ListenerWindow : public QWidget
 public:
     explicit ListenerWindow(const Account &account,EntryService &entryService,ListenerService &listenerService,QWidget *parent = nullptr);
     ~ListenerWindow();
+    void loadPlaylistSongs(int playlistId);
 
 private slots:
     void on_playButton_clicked();
@@ -27,6 +29,10 @@ private slots:
     void on_stopButton_clicked();
 
     void on_likeButton_clicked();
+
+    void on_playlistListWidget_itemClicked(QListWidgetItem *item);
+
+    void on_createPlaylistButton_clicked();
 
 private:
     Ui::ListenerWindow *ui;

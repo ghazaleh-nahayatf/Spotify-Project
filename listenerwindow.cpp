@@ -1,7 +1,9 @@
 #include "listenerwindow.h"
 #include "ui_listenerwindow.h"
 #include "spotifyexception.h"
+#include "createplaylistwindow.h"
 #include<QMessageBox>
+#include<QDialog>
 
 ListenerWindow::ListenerWindow(const Account &account,
                                EntryService &entryService,
@@ -188,6 +190,48 @@ void ListenerWindow::on_likeButton_clicked()
             this,
             "Error",
             ex.what());
+    }
+}
+
+
+void ListenerWindow::on_playlistListWidget_itemClicked(QListWidgetItem *item)
+{
+    int playlistId = item->data(Qt::UserRole).toInt();
+
+    loadPlaylistSongs(playlistId);
+}
+void ListenerWindow::loadPlaylistSongs(int playlistId)
+{
+    ui->playlistSongsListWidget->clear();
+
+    vector<Song> songs =
+        listenerService.getPlaylistSongs(playlistId);
+
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        QListWidgetItem *item =
+            new QListWidgetItem(
+                QString::fromStdString(
+                    songs[i].getName()));
+
+        item->setData(
+            Qt::UserRole,
+            songs[i].getTrackId());
+
+        ui->playlistSongsListWidget->addItem(item);
+    }
+}
+
+void ListenerWindow::on_createPlaylistButton_clicked()
+{
+    CreatePlaylistWindow dialog(
+        listenerService,
+        currentAccount.getAccountId(),
+        this);
+
+    if(dialog.exec() == QDialog::Accepted)
+    {
+        loadPlaylists();
     }
 }
 

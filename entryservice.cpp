@@ -46,12 +46,14 @@ bool EntryService::registerListener(const Listener& listener)
     {
         throw SpotifyException("Could not create listener.");
     }
-
-    Playlist favorite;
-    favorite.setPlaylistName("Favorites");
-    favorite.setListenerId(listenerId.value());
-
-    playlistRepository.save(favorite);
+    if (playlistRepository.getFavoritePlaylistId(listenerId.value()) == -1)
+    {
+        Playlist favorite(
+            "Favorites",
+            0,
+            listenerId.value());
+        playlistRepository.save(favorite);
+    }
 
     return true;
 }

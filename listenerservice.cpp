@@ -18,8 +18,17 @@ bool ListenerService::createPlaylist(const Playlist &playlist)
     if (!listenerRepository.search(playlist.getListenerId()).has_value())
         throw SpotifyException("Listener not found.");
 
-    playlistRepository.save(playlist);
+    vector<Playlist> playlists = playlistRepository.getByListener(playlist.getListenerId());
 
+    for(int i = 0; i < static_cast<int>(playlists.size()); i++)
+    {
+        if(playlists[i].getPlaylistName() ==
+            playlist.getPlaylistName())
+        {
+            throw SpotifyException("Playlist name already exists.");
+        }
+    }
+    playlistRepository.save(playlist);
     return true;
 }
 bool ListenerService::editPlaylist(const Playlist& playlist)
