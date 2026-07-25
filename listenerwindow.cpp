@@ -235,3 +235,9 @@ void ListenerWindow::on_createPlaylistButton_clicked()
     }
 }
 
+
+void ListenerWindow::on_addToPlaylistButton__clicked()
+{
+
+}
+
