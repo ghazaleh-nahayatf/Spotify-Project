@@ -58,14 +58,14 @@ void RegisterWindow::on_registerButton_clicked()
         if(ui->artistRadioButton->isChecked())
         {
             Artist artist(fullName.toStdString(), username.toStdString(),
-                "", 1 ,"Artist", password.toStdString());
+                "", 0 ,"Artist", password.toStdString());
 
             entryService.registerArtist(artist);
         }
         else if(ui->listenerRadioButton->isChecked())
         {
             Listener listener(fullName.toStdString(), username.toStdString(),
-                "", 1 ,"Listener", password.toStdString());
+                "", 0 ,"Listener", password.toStdString());
 
             entryService.registerListener(listener);
         }

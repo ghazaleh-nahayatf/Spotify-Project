@@ -56,10 +56,7 @@ void ArtistWindow::on_createAlbumButton_clicked()
 
     if(dialog.exec() == QDialog::Accepted)
     {
-        if(ui->listWidget->currentItem() != nullptr)
-        {
-            on_listWidget_itemClicked(ui->listWidget->currentItem());
-        }
+        loadAlbums();
     }
 }
 void ArtistWindow::loadAlbums()

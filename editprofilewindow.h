@@ -29,9 +29,9 @@ private slots:
 
     void on_cancelButton_clicked();
 
-    void on_browseButton_clicked();
-
     void on_passwordLineEdit_textChanged(const QString &arg1);
+
+    void on_browsePhotoButton_clicked();
 
 private:
     Ui::EditProfileWindow *ui;

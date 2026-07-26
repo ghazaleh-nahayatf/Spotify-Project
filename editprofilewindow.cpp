@@ -187,8 +187,7 @@ void EditProfileWindow::on_cancelButton_clicked()
     reject();
 }
 
-
-void EditProfileWindow::on_browseButton_clicked()
+void EditProfileWindow::on_browsePhotoButton_clicked()
 {
     QString path =
         QFileDialog::getOpenFileName(

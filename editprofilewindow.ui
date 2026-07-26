@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
+    <width>540</width>
     <height>356</height>
    </rect>
   </property>
@@ -75,7 +75,7 @@
     <widget class="QLineEdit" name="passwordLineEdit"/>
    </item>
    <item row="4" column="7">
-    <widget class="QPushButton" name="browseButton">
+    <widget class="QPushButton" name="browsePhotoButton">
      <property name="text">
       <string>Browse</string>
      </property>

@@ -127,7 +127,18 @@ bool SongRepository::update(const Song& song)
 
     return false;
 }
+bool SongRepository::existsByFilePath(const string& filePath)
+{
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        if(songs[i].getFilePath() == filePath)
+        {
+            return true;
+        }
+    }
 
+    return false;
+}
 
 
 

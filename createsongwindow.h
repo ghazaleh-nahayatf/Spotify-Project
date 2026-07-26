@@ -29,8 +29,6 @@ private slots:
 
     void on_browseButton_clicked();
 
-    void on_CreateSongWindow_accepted();
-
 private:
     Ui::CreateSongWindow *ui;
 

@@ -36,6 +36,8 @@ public:
     bool update(const Song& entity) override;
 
     vector<Song> getAll();
+
+    bool existsByFilePath(const string& filePath);
 };
 
 #endif // SONGREPOSITORY_H

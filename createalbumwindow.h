@@ -30,7 +30,7 @@ private:
     ArtistService &artistService;
     int artistId;
     Album currentAlbum;
-    bool editMode;
+    bool editMode = false;
 };
 
 #endif // CREATEALBUMWINDOW_H

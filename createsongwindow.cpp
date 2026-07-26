@@ -146,9 +146,3 @@ void CreateSongWindow::on_browseButton_clicked()
     ui->filePathLineEdit->setText(path);
 }
 
-
-void CreateSongWindow::on_CreateSongWindow_accepted()
-{
-
-}
-

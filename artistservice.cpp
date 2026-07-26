@@ -52,6 +52,11 @@ bool ArtistService::createSong(const Song& song)
         throw SpotifyException( "A song with this name already exists in this album.");
     }
 
+    if(songRepository.existsByFilePath(song.getFilePath()))
+    {
+        throw SpotifyException(
+            "This music file has already been uploaded.");
+    }
     songRepository.save(song);
 
     return true;
