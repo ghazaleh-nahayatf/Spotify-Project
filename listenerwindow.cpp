@@ -3,17 +3,20 @@
 #include "spotifyexception.h"
 #include "createplaylistwindow.h"
 #include "editprofilewindow.h"
+#include "loginwindow.h"
 #include<QMessageBox>
 #include<QDialog>
 
 ListenerWindow::ListenerWindow(const Account &account,
-                               EntryService &entryService,
-                               ListenerService &listenerService,
-                               QWidget *parent)
+                           EntryService &entryService,
+                           ArtistService &artistService,
+                           ListenerService& listenerService,
+                           QWidget *parent)
     : QWidget(parent),
     ui(new Ui::ListenerWindow),
     currentAccount(account),
     entryService(entryService),
+    artistService(artistService),
     listenerService(listenerService)
 {
     ui->setupUi(this);
@@ -484,6 +487,55 @@ void ListenerWindow::on_deletePlaylistButton_clicked()
         QMessageBox::warning(this,
                              "Error",
                              ex.what());
+    }
+}
+
+
+void ListenerWindow::on_logoutButton_clicked()
+{
+    QMessageBox::StandardButton reply;
+
+    reply = QMessageBox::question(
+        this,
+        "Log Out",
+        "Are you sure you want to log out?",
+        QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::No)
+        return;
+
+    LoginWindow *window = new LoginWindow(entryService,artistService, listenerService);
+
+    window->show();
+
+    close();
+
+}
+
+
+void ListenerWindow::on_searchLineEdit_textChanged(const QString &text)
+{
+
+    ui->songsListWidget->clear();
+
+    vector<Song> songs = listenerService.getAllSongs();
+
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        QString songName =
+            QString::fromStdString(songs[i].getName());
+
+        if(songName.contains(text, Qt::CaseInsensitive))
+        {
+            QListWidgetItem *item =
+                new QListWidgetItem(songName);
+
+            item->setData(
+                Qt::UserRole,
+                songs[i].getTrackId());
+
+            ui->songsListWidget->addItem(item);
+        }
     }
 }
 

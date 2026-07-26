@@ -7,6 +7,7 @@
 #include <QListWidgetItem>
 #include "listenerservice.h"
 #include "entryservice.h"
+#include "artistservice.h"
 
 namespace Ui {
 class ListenerWindow;
@@ -17,7 +18,11 @@ class ListenerWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit ListenerWindow(const Account &account,EntryService &entryService,ListenerService &listenerService,QWidget *parent = nullptr);
+    explicit ListenerWindow(const Account &account,
+                            EntryService &entryService,
+                            ArtistService& artistService,
+                            ListenerService &listenerService,
+                            QWidget *parent = nullptr);
     ~ListenerWindow();
     void loadPlaylistSongs(int playlistId);
 
@@ -44,12 +49,17 @@ private slots:
 
     void on_deletePlaylistButton_clicked();
 
+    void on_logoutButton_clicked();
+
+    void on_searchLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::ListenerWindow *ui;
 
     Account currentAccount;
 
     EntryService& entryService;
+    ArtistService& artistService;
     ListenerService& listenerService;
 
     QMediaPlayer *player;

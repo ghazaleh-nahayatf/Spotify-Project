@@ -33,6 +33,7 @@ SOURCES += \
         listenerwindow.cpp \
         loginwindow.cpp \
         main.cpp \
+        passwordstrength.cpp \
         playlist.cpp \
         playlistfilemanger.cpp \
         playlistrepository.cpp \
@@ -79,6 +80,7 @@ HEADERS += \
     listenerservice.h \
     listenerwindow.h \
     loginwindow.h \
+    passwordstrength.h \
     playlist.h \
     playlistfilemanger.h \
     playlistrepository.h \

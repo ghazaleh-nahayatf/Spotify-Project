@@ -51,7 +51,7 @@ void LoginWindow::on_loginButton_clicked()
         else if(account.getRole() == "Listener")
         {
             QMessageBox::information(this, "Listener",  "Welcome Listener");
-           ListenerWindow *window =new ListenerWindow(account, entryService,listenerService);
+           ListenerWindow *window =new ListenerWindow(account,  entryService,artistService, listenerService);
             window->show();
 
             this->close();
