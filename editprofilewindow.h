@@ -31,6 +31,8 @@ private slots:
 
     void on_browseButton_clicked();
 
+    void on_passwordLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::EditProfileWindow *ui;
 

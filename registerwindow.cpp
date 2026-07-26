@@ -3,6 +3,7 @@
 
 #include "loginwindow.h"
 #include "spotifyexception.h"
+#include "passwordstrength.h"
 
 #include <QMessageBox>
 
@@ -105,7 +106,15 @@ void RegisterWindow::on_registerButton_clicked()
                               "Unknown exception.");
     }
 }
+
 RegisterWindow::~RegisterWindow()
 {
     delete ui;
 }
+
+void RegisterWindow::on_passwordLineEdit_textChanged(const QString &text)
+{
+    ui->passwordStrengthLabel->setText(
+        PasswordStrength::passStrength(text));
+}
+

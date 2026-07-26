@@ -1,6 +1,7 @@
 #include "editprofilewindow.h"
 #include "ui_editprofilewindow.h"
 #include "spotifyexception.h"
+#include "passwordstrength.h"
 #include <QFileDialog>
 #include <QPixmap>
 #include<QMessageBox>
@@ -215,5 +216,12 @@ void EditProfileWindow::on_browseButton_clicked()
             ui->photoLabel->size(),
             Qt::KeepAspectRatio,
             Qt::SmoothTransformation));
+}
+
+
+void EditProfileWindow::on_passwordLineEdit_textChanged(const QString &text)
+{
+    ui->passwordStrengthLabel->setText(
+        PasswordStrength::passStrength(text));
 }
 

@@ -20,9 +20,11 @@ public:
                             QWidget *parent = nullptr);
     ~RegisterWindow();
 
+
 private slots:
     void on_backButton_clicked();
     void on_registerButton_clicked();
+    void on_passwordLineEdit_textChanged(const QString &arg1);
 
 private:
     Ui::RegisterWindow *ui;
@@ -30,6 +32,7 @@ private:
     EntryService& entryService;
     ArtistService& artistService;
     ListenerService& listenerService;
+
 };
 
 #endif // REGISTERWINDOW_H
