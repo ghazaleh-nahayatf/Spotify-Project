@@ -91,6 +91,7 @@ bool PlaylistRepository::addSong(int playlistId, int trackId)
     }
 
     playlistSongs[playlistId].push_back(trackId);
+    PlaylistFileManager::save(playlists, playlistSongs);
 
     return true;
 }
@@ -104,6 +105,7 @@ bool PlaylistRepository::removeSong(int playlistId, int trackId)
         if (playlistSongs[playlistId][i] == trackId)
         {
             playlistSongs[playlistId].erase(playlistSongs[playlistId].begin() + i);
+            PlaylistFileManager::save(playlists, playlistSongs);
 
             return true;
         }

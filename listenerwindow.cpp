@@ -542,12 +542,11 @@ void ListenerWindow::on_searchLineEdit_textChanged(const QString &text)
 
 void ListenerWindow::on_recommendSongsButton_clicked()
 {
-    std::vector<Song> songs =listenerService.recommendSongs(currentAccount.getAccountId());
+    std::vector<Song> songs =
+        listenerService.recommendSongs(currentAccount.getAccountId());
+
     ui->songsListWidget->clear();
-    for(int i = 0; i < static_cast<int>(songs.size()); i++)
-    {
-        ui->songsListWidget->addItem(QString::fromStdString(songs[i].getName()));
-    }
+
     if(songs.empty())
     {
         QMessageBox::information(
@@ -557,19 +556,38 @@ void ListenerWindow::on_recommendSongsButton_clicked()
 
         return;
     }
-}
 
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        QListWidgetItem *item =
+            new QListWidgetItem(
+                QString::fromStdString(songs[i].getName()));
+
+        item->setData(
+            Qt::UserRole,
+            songs[i].getTrackId());
+
+        ui->songsListWidget->addItem(item);
+    }
+}
 
 void ListenerWindow::on_showAllSongsButton_clicked()
 {
     ui->songsListWidget->clear();
 
-    vector<Song> songs = listenerService.getAllSongs();
+    vector<Song> songs =
+        listenerService.getAllSongs();
 
-    for (int i = 0; i < static_cast<int>(songs.size()); i++)
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
     {
-        ui->songsListWidget->addItem(
-            QString::fromStdString(songs[i].getName()));
+        QListWidgetItem *item =
+            new QListWidgetItem(
+                QString::fromStdString(songs[i].getName()));
+
+        item->setData(
+            Qt::UserRole,
+            songs[i].getTrackId());
+
+        ui->songsListWidget->addItem(item);
     }
 }
-

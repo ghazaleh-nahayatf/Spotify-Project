@@ -10,7 +10,8 @@ CreatePlaylistWindow::CreatePlaylistWindow(
     : QDialog(parent),
     ui(new Ui::CreatePlaylistWindow),
     listenerService(listenerService),
-    listenerId(listenerId)
+    listenerId(listenerId),
+    editMode(false)
 {
     ui->setupUi(this);
 }

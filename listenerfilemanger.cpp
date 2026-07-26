@@ -28,18 +28,18 @@ void ListenerFileManager::save(const vector<Listener>& listeners)
 
         const vector<int>& liked = listeners[i].getLikedSongs();
 
-        for(int j = 0; j < static_cast<int>(liked.size()); j++)
+        for (int j = 0; j < static_cast<int>(liked.size()); j++)
         {
             file << liked[j];
 
-            if(j != static_cast<int>(liked.size()) - 1)
+            if (j != static_cast<int>(liked.size()) - 1)
                 file << ",";
         }
 
         file << '\n';
+    }
 
     file.close();
-    }
 }
 vector<Listener> ListenerFileManager::load()
 {
