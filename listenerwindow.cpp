@@ -2,6 +2,7 @@
 #include "ui_listenerwindow.h"
 #include "spotifyexception.h"
 #include "createplaylistwindow.h"
+#include "editprofilewindow.h"
 #include<QMessageBox>
 #include<QDialog>
 
@@ -31,6 +32,19 @@ ListenerWindow::ListenerWindow(const Account &account,
     loadSongs();
 
     loadPlaylists();
+
+    QString photoPath =
+        QString::fromStdString(
+            currentAccount.getProfilePhotoPath());
+
+    if(!photoPath.isEmpty())
+    {
+        ui->profilePhotoLabel->setPixmap(
+            QPixmap(photoPath).scaled(
+                ui->profilePhotoLabel->size(),
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation));
+    }
 }
 void ListenerWindow::loadSongs()
 {
@@ -238,6 +252,238 @@ void ListenerWindow::on_createPlaylistButton_clicked()
 
 void ListenerWindow::on_addToPlaylistButton__clicked()
 {
+    if(ui->songsListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            "Select a song.");
 
+        return;
+    }
+
+    if(ui->playlistListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            "Select a playlist.");
+
+        return;
+    }
+
+    int trackId =
+        ui->songsListWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    int playlistId =
+        ui->playlistListWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    try
+    {
+        listenerService.addSongToPlaylist(
+            playlistId,
+            trackId);
+
+        QMessageBox::information(
+            this,
+            "Success",
+            "Song added to playlist.");
+
+        loadPlaylistSongs(playlistId);
+    }
+    catch(const SpotifyException& ex)
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            ex.what());
+    }
+}
+
+
+void ListenerWindow::on_removeFromPlaylistButton_clicked()
+{
+    if(ui->playlistListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            "Please select a playlist.");
+
+        return;
+    }
+
+    if(ui->playlistSongsListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            "Please select a song.");
+
+        return;
+    }
+
+    int playlistId =
+        ui->playlistListWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    int trackId =
+        ui->playlistSongsListWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    try
+    {
+        listenerService.removeSongFromPlaylist(
+            playlistId,
+            trackId);
+
+        loadPlaylistSongs(playlistId);
+
+        QMessageBox::information(
+            this,
+            "Success",
+            "Song removed from playlist.");
+    }
+    catch(const SpotifyException& ex)
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            ex.what());
+    }
+}
+
+
+void ListenerWindow::on_renamePlaylistButton_clicked()
+{
+    if(ui->playlistListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            "Please select a playlist.");
+
+        return;
+    }
+
+    int playlistId =
+        ui->playlistListWidget
+            ->currentItem()
+            ->data(Qt::UserRole)
+            .toInt();
+
+    Playlist playlist = listenerService.getPlaylist(playlistId);
+
+    if(playlist.getPlaylistName() == "Favorites")
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            "Favorites playlist cannot be renamed.");
+
+        return;
+    }
+    CreatePlaylistWindow dialog(
+        listenerService,
+        currentAccount.getAccountId(),
+        playlist,
+        this);
+
+    if(dialog.exec() == QDialog::Accepted)
+    {
+        loadPlaylists();
+    }
+}
+
+
+void ListenerWindow::on_editProfileButton_clicked()
+{
+
+    Listener listener = listenerService.getListener(currentAccount.getAccountId());
+
+    EditProfileWindow dialog(
+        listenerService,
+        listener,
+        this);
+
+    if(dialog.exec() == QDialog::Accepted)
+    {
+        currentAccount = listenerService.getListener(currentAccount.getAccountId());
+
+        QString photoPath =
+            QString::fromStdString(
+                currentAccount.getProfilePhotoPath());
+
+        if(!photoPath.isEmpty())
+        {
+            ui->profilePhotoLabel->setPixmap(
+                QPixmap(photoPath).scaled(
+                    ui->profilePhotoLabel->size(),
+                    Qt::KeepAspectRatio,
+                    Qt::SmoothTransformation));
+        }
+
+        ui->listenerPanelLabel->setText(
+            QString::fromStdString(
+                "Welcome, " +
+                currentAccount.getFullName()));
+    }
+}
+
+
+void ListenerWindow::on_deletePlaylistButton_clicked()
+{
+    if(ui->playlistListWidget->currentRow() == -1)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             "Please select a playlist.");
+
+        return;
+    }
+
+    int playlistId = ui->playlistListWidget->currentItem()
+            ->data(Qt::UserRole).toInt();
+
+    Playlist playlist = listenerService.getPlaylist(playlistId);
+
+    if(playlist.getPlaylistName() == "Favorites")
+    {
+        QMessageBox::warning(
+            this,
+            "Error",
+            "Favorites playlist cannot be deleted.");
+
+        return;
+    }
+    QMessageBox::StandardButton reply;
+
+    reply = QMessageBox::question(this,
+                                  "Delete Playlist",
+                                  "Are you sure?",
+                                  QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::No)
+        return;
+
+    try
+    {
+        listenerService.deletePlaylist(playlistId);
+
+        QMessageBox::information(this,
+                                 "Success",
+                                 "Playlist deleted successfully.");
+
+        loadPlaylists();
+        ui->playlistSongsListWidget->clear();
+    }
+    catch(const SpotifyException& ex)
+    {
+        QMessageBox::warning(this,
+                             "Error",
+                             ex.what());
+    }
 }
 

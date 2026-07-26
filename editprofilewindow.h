@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "artistservice.h"
+#include "listenerservice.h"
 
 namespace Ui {
 class EditProfileWindow;
@@ -17,6 +18,10 @@ public:
         ArtistService &artistService,
         const Artist &artist,
         QWidget *parent = nullptr);
+    EditProfileWindow(
+        ListenerService& listenerService,
+        const Listener &listener,
+        QWidget *parent = nullptr);
     ~EditProfileWindow();
 
 private slots:
@@ -29,9 +34,13 @@ private slots:
 private:
     Ui::EditProfileWindow *ui;
 
-    ArtistService &artistService;
+    ArtistService* artistService = nullptr;
+    ListenerService* listenerService = nullptr;
 
     Artist currentArtist;
+    Listener currentListener;
+
+    bool isArtist;
 };
 
 #endif // EDITPROFILEWINDOW_H

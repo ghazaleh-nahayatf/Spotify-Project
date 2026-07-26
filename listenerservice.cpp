@@ -69,10 +69,11 @@ bool ListenerService::removeSongFromPlaylist(int playlistId, int trackId)
     if (!playlistRepository.search(playlistId).has_value())
         throw SpotifyException("Playlist not found.");
 
-    if (!playlistRepository.addSong(playlistId, trackId))
-        throw SpotifyException("Song doesnot exist.");
+    if (!songRepository.search(trackId).has_value())
+        throw SpotifyException("Song not found.");
 
-    playlistRepository.removeSong(playlistId, trackId);
+    if (!playlistRepository.removeSong(playlistId, trackId))
+        throw SpotifyException("Song does not exist in playlist.");
 
     return true;
 }
@@ -162,4 +163,46 @@ Song ListenerService::getSong(int trackId)
         throw SpotifyException("Song not found.");
 
     return song.value();
+}
+Playlist ListenerService::getPlaylist(int playlistId)
+{
+    optional<Playlist> playlist =
+        playlistRepository.search(playlistId);
+
+    if(!playlist.has_value())
+    {
+        throw SpotifyException("Playlist not found.");
+    }
+
+    return playlist.value();
+}
+Listener ListenerService::getListener(int listenerId)
+{
+    std::optional<Listener> listener =
+        listenerRepository.search(listenerId);
+
+    if(!listener.has_value())
+        throw SpotifyException("Listener not found.");
+
+    return listener.value();
+}
+bool ListenerService::editProfile(const Listener& listener)
+{
+    std::optional<Listener> oldListener =listenerRepository.search(listener.getListenerId());
+
+    if(!oldListener.has_value())
+        throw SpotifyException("Listener not found.");
+
+    std::optional<Account> account =
+        listenerRepository.searchByUserName(listener.getUserName());
+
+    if(account.has_value() &&
+        account->getAccountId() != listener.getListenerId())
+    {
+        throw SpotifyException("Username already exists.");
+    }
+
+    listenerRepository.update(listener);
+
+    return true;
 }

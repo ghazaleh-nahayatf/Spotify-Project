@@ -14,6 +14,26 @@ CreatePlaylistWindow::CreatePlaylistWindow(
 {
     ui->setupUi(this);
 }
+CreatePlaylistWindow::CreatePlaylistWindow(
+    ListenerService &listenerService,
+    int listenerId,
+    const Playlist &playlist,
+    QWidget *parent)
+    : QDialog(parent),
+    ui(new Ui::CreatePlaylistWindow),
+    listenerService(listenerService),
+    listenerId(listenerId),
+    currentPlaylist(playlist),
+    editMode(true)
+{
+    ui->setupUi(this);
+
+    ui->playlistNameLineEdit->setText(
+        QString::fromStdString(
+            playlist.getPlaylistName()));
+
+    ui->createButton->setText("Save");
+}
 CreatePlaylistWindow::~CreatePlaylistWindow()
 {
     delete ui;
@@ -34,17 +54,29 @@ void CreatePlaylistWindow::on_createButton_clicked()
         return;
     }
 
-    Playlist playlist;
-
-    playlist.setPlaylistName(
-        name.toStdString());
-
-    playlist.setListenerId(listenerId);
-
     try
     {
-        listenerService.createPlaylist(
-            playlist);
+        if(editMode)
+        {
+            currentPlaylist.setPlaylistName(
+                name.toStdString());
+
+            listenerService.editPlaylist(
+                currentPlaylist);
+        }
+        else
+        {
+            Playlist playlist;
+
+            playlist.setPlaylistName(
+                name.toStdString());
+
+            playlist.setListenerId(
+                listenerId);
+
+            listenerService.createPlaylist(
+                playlist);
+        }
 
         accept();
     }

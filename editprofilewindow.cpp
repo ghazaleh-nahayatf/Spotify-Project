@@ -11,7 +11,7 @@ EditProfileWindow::EditProfileWindow(
     QWidget *parent)
     : QDialog(parent),
     ui(new Ui::EditProfileWindow),
-    artistService(artistService),
+    artistService(&artistService),
     currentArtist(artist)
 {
     ui->setupUi(this);
@@ -39,8 +39,46 @@ EditProfileWindow::EditProfileWindow(
                     Qt::KeepAspectRatio,
                     Qt::SmoothTransformation));
     }
-}
 
+    isArtist = true;
+}
+EditProfileWindow::EditProfileWindow(
+   ListenerService &listenerService,
+    const Listener &listener,
+    QWidget *parent)
+    : QDialog(parent),
+    ui(new Ui::EditProfileWindow),
+    listenerService(&listenerService),
+    currentListener(listener)
+{
+    ui->setupUi(this);
+
+    ui->fullNameLineEdit->setText(
+        QString::fromStdString(listener.getFullName()));
+
+    ui->usernameLineEdit->setText(
+        QString::fromStdString(listener.getUserName()));
+
+    ui->biographyTextEdit->setPlainText(
+        QString::fromStdString(listener.getBiography()));
+
+    ui->passwordLineEdit->setText(
+        QString::fromStdString(listener.getPassword()));
+
+    if(!listener.getProfilePhotoPath().empty())
+    {
+        ui->photoLabel->setPixmap(
+            QPixmap(
+                QString::fromStdString(
+                    listener.getProfilePhotoPath()))
+                .scaled(
+                    ui->photoLabel->size(),
+                    Qt::KeepAspectRatio,
+                    Qt::SmoothTransformation));
+    }
+
+    isArtist = false;
+}
 EditProfileWindow::~EditProfileWindow()
 {
     delete ui;
@@ -76,34 +114,70 @@ void EditProfileWindow::on_saveButton_clicked()
 
         return;
     }
-    currentArtist.setFullName(
-        fullName.toStdString());
 
-    currentArtist.setUserName(
-        username.toStdString());
-
-    currentArtist.setBiography(
-        biography.toStdString());
-
-    currentArtist.setPassword(
-        password.toStdString());
-
-    try
+    if(isArtist)
     {
-        artistService.editProfile(currentArtist);
+        currentArtist.setFullName(
+            fullName.toStdString());
 
-        QMessageBox::information(this,
-                                 "Success",
-                                 "Profile updated successfully.");
+        currentArtist.setUserName(
+            username.toStdString());
 
-        accept();
+        currentArtist.setBiography(
+            biography.toStdString());
+
+        currentArtist.setPassword(
+            password.toStdString());
+
+        try
+        {
+            artistService->editProfile(currentArtist);
+
+            QMessageBox::information(this,
+                                     "Success",
+                                     "Profile updated successfully.");
+
+            accept();
+        }
+        catch(const SpotifyException& ex)
+        {
+            QMessageBox::warning(this,
+                                 "Error",
+                                 ex.what());
+        }
     }
-    catch(const SpotifyException& ex)
+    else
     {
-        QMessageBox::warning(this,
-                             "Error",
-                             ex.what());
+        currentListener.setFullName(
+            fullName.toStdString());
+
+        currentListener.setUserName(
+            username.toStdString());
+
+        currentListener.setBiography(
+            biography.toStdString());
+
+        currentListener.setPassword(
+            password.toStdString());
+
+        try
+        {
+            listenerService->editProfile(currentListener);
+
+            QMessageBox::information(this,
+                                     "Success",
+                                     "Profile updated successfully.");
+
+            accept();
+        }
+        catch(const SpotifyException& ex)
+        {
+            QMessageBox::warning(this,
+                                 "Error",
+                                 ex.what());
+        }
     }
+
 }
 
 
@@ -125,8 +199,16 @@ void EditProfileWindow::on_browseButton_clicked()
     if(path.isEmpty())
         return;
 
-    currentArtist.setProfilePhotoPath(
-        path.toStdString());
+    if(isArtist)
+    {
+        currentArtist.setProfilePhotoPath(
+            path.toStdString());
+    }
+    else
+    {
+        currentListener.setProfilePhotoPath(
+            path.toStdString());
+    }
 
     ui->photoLabel->setPixmap(
         QPixmap(path).scaled(

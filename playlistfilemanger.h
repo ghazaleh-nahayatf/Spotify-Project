@@ -3,15 +3,18 @@
 
 #include<vector>
 #include "playlist.h"
+#include "PlaylistData.h"
 
 using namespace std;
 
 class PlaylistFileManager
 {
 public:
-    static void save(const vector<Playlist>& playlists);
+    static void save(
+        const std::vector<Playlist>& playlists,
+        const std::map<int,std::vector<int>>& playlistSongs);
 
-    static vector<Playlist> load();
+    static PlaylistData load();
 };
 
 #endif // PLAYLISTFILEMANGER_H

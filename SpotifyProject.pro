@@ -53,6 +53,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    PlaylistData.h \
     abstractrepository.h \
     account.h \
     accountrepository.h \

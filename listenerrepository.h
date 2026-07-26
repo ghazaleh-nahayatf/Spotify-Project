@@ -29,6 +29,8 @@ public:
     bool isLiked(int listenerId, int trackId);
 
     bool removeLikedSongFromAllListeners(int trackId);
+
+    bool update(const Listener& entity);
 };
 
 #endif // LISTENERREPOSITORY_H

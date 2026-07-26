@@ -17,6 +17,13 @@ public:
         ListenerService& listenerService,
         int listenerId,
         QWidget *parent = nullptr);
+
+    CreatePlaylistWindow(
+        ListenerService& listenerService,
+        int listenerId,
+        const Playlist& playlist,
+        QWidget *parent = nullptr);
+
     ~CreatePlaylistWindow();
 
 private slots:
@@ -27,8 +34,10 @@ private slots:
 private:
     Ui::CreatePlaylistWindow *ui;
     ListenerService& listenerService;
-
     int listenerId;
+    Playlist currentPlaylist;
+    bool editMode = false;
+
 };
 
 #endif // CREATEPLAYLISTWINDOW_H

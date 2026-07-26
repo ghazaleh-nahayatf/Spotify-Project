@@ -34,6 +34,16 @@ private slots:
 
     void on_createPlaylistButton_clicked();
 
+    void on_addToPlaylistButton__clicked();
+
+    void on_removeFromPlaylistButton_clicked();
+
+    void on_renamePlaylistButton_clicked();
+
+    void on_editProfileButton_clicked();
+
+    void on_deletePlaylistButton_clicked();
+
 private:
     Ui::ListenerWindow *ui;
 

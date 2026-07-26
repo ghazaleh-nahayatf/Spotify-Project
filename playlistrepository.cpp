@@ -3,7 +3,10 @@
 
 PlaylistRepository::PlaylistRepository()
 {
-    playlists = PlaylistFileManager::load();
+    PlaylistData data = PlaylistFileManager::load();
+
+    playlists = data.playlists;
+    playlistSongs = data.playlistSongs;
 
     nextPlaylistId = 1;
 
@@ -20,7 +23,7 @@ optional<int> PlaylistRepository::save(const Playlist& entity)
         if (playlists[i].getPlaylistId() == entity.getPlaylistId())
         {
             playlists[i] = entity;
-            PlaylistFileManager::save(playlists);
+            PlaylistFileManager::save( playlists, playlistSongs);
             return playlists[i].getPlaylistId();
         }
     }
@@ -30,7 +33,9 @@ optional<int> PlaylistRepository::save(const Playlist& entity)
 
     playlists.push_back(newPlaylist);
 
-    PlaylistFileManager::save(playlists);
+    playlistSongs[newPlaylist.getPlaylistId()] = vector<int>();
+
+    PlaylistFileManager::save( playlists, playlistSongs);
 
     return newPlaylist.getPlaylistId();
 }
@@ -44,7 +49,7 @@ bool PlaylistRepository::remove(int id)
 
             playlistSongs.erase(id);
 
-            PlaylistFileManager::save(playlists);
+            PlaylistFileManager::save(playlists, playlistSongs);
 
             return true;
         }
@@ -98,8 +103,7 @@ bool PlaylistRepository::removeSong(int playlistId, int trackId)
     {
         if (playlistSongs[playlistId][i] == trackId)
         {
-            playlistSongs[playlistId].erase(
-                playlistSongs[playlistId].begin() + i);
+            playlistSongs[playlistId].erase(playlistSongs[playlistId].begin() + i);
 
             return true;
         }
@@ -111,8 +115,7 @@ int PlaylistRepository::getFavoritePlaylistId(int listenerId)
 {
     for (int i = 0; i < static_cast<int>(playlists.size()); i++)
     {
-        if (playlists[i].getListenerId() == listenerId &&
-            playlists[i].getPlaylistName() == "Favorites")
+        if (playlists[i].getListenerId() == listenerId && playlists[i].getPlaylistName() == "Favorites")
         {
             return playlists[i].getPlaylistId();
         }
@@ -136,8 +139,7 @@ bool PlaylistRepository::removeSongFromAllPlaylists(int trackId)
         {
             if (playlistSongs[playlistId][j] == trackId)
             {
-                playlistSongs[playlistId].erase(
-                    playlistSongs[playlistId].begin() + j);
+                playlistSongs[playlistId].erase( playlistSongs[playlistId].begin() + j);
 
                 removed = true;
                 j--;
@@ -159,8 +161,7 @@ bool PlaylistRepository::update(const Playlist& entity)
         {
             playlists[i] = entity;
 
-            PlaylistFileManager fileManager;
-            fileManager.save(playlists);
+            PlaylistFileManager::save(playlists, playlistSongs);
 
             return true;
         }

@@ -47,6 +47,12 @@ public:
     vector<Song> getAllSongs();
 
     Song getSong(int trackId);
+
+    Playlist getPlaylist(int playlistId);
+
+    Listener getListener(int listenerId);
+
+    bool editProfile(const Listener& listener);
 };
 
 #endif // LISTENERSERVICE_H

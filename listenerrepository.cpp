@@ -120,3 +120,20 @@ bool ListenerRepository::removeLikedSongFromAllListeners(int trackId)
 
     return removed;
 }
+bool ListenerRepository::update(const Listener& entity)
+{
+    for(int i = 0; i < static_cast<int>(listeners.size()); i++)
+    {
+        if(listeners[i].getListenerId() == entity.getListenerId())
+        {
+            listeners[i] = entity;
+
+            ListenerFileManager fileManager;
+            fileManager.save(listeners);
+
+            return true;
+        }
+    }
+
+    return false;
+}
