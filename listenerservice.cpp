@@ -206,3 +206,90 @@ bool ListenerService::editProfile(const Listener& listener)
 
     return true;
 }
+
+vector<Song> ListenerService::recommendSongs(int listenerId)
+{
+    if (!listenerRepository.search(listenerId).has_value())
+        throw SpotifyException("Listener not found.");
+
+    int favoriteId = playlistRepository.getFavoritePlaylistId(listenerId);
+
+    vector<Song> favoriteSongs = getPlaylistSongs(favoriteId);
+
+    if (favoriteSongs.empty())
+        return {};
+
+    map<string, int> genres;
+
+    for (int i = 0; i < static_cast<int>(favoriteSongs.size()); i++)
+    {
+        genres[favoriteSongs[i].getGenre()]++;
+    }
+
+    string favoriteGenre = favoriteSongs[0].getGenre();
+    int maxCount = 0;
+
+    vector<string> checkedGenres;
+
+    for (int i = 0; i < static_cast<int>(favoriteSongs.size()); i++)
+    {
+        string currentGenre = favoriteSongs[i].getGenre();
+
+        bool checked = false;
+
+        for (int j = 0; j < static_cast<int>(checkedGenres.size()); j++)
+        {
+            if (checkedGenres[j] == currentGenre)
+            {
+                checked = true;
+                break;
+            }
+        }
+
+        if (checked)
+            continue;
+
+        checkedGenres.push_back(currentGenre);
+
+        int count = 0;
+
+        for (int j = 0; j < static_cast<int>(favoriteSongs.size()); j++)
+        {
+            if (favoriteSongs[j].getGenre() == currentGenre)
+                count++;
+        }
+
+        if (count > maxCount)
+        {
+            maxCount = count;
+            favoriteGenre = currentGenre;
+        }
+    }
+
+    vector<Song> allSongs = songRepository.getAll();
+
+    vector<Song> result;
+
+    for (int i = 0; i < static_cast<int>(allSongs.size()); i++)
+    {
+        if (allSongs[i].getGenre() != favoriteGenre)
+            continue;
+
+        bool liked = false;
+
+        for (int j = 0; j < static_cast<int>(favoriteSongs.size()); j++)
+        {
+            if (allSongs[i].getTrackId() ==
+                favoriteSongs[j].getTrackId())
+            {
+                liked = true;
+                break;
+            }
+        }
+
+        if (!liked)
+            result.push_back(allSongs[i]);
+    }
+
+    return result;
+}

@@ -53,6 +53,10 @@ private slots:
 
     void on_searchLineEdit_textChanged(const QString &arg1);
 
+    void on_recommendSongsButton_clicked();
+
+    void on_showAllSongsButton_clicked();
+
 private:
     Ui::ListenerWindow *ui;
 

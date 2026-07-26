@@ -539,3 +539,37 @@ void ListenerWindow::on_searchLineEdit_textChanged(const QString &text)
     }
 }
 
+
+void ListenerWindow::on_recommendSongsButton_clicked()
+{
+    std::vector<Song> songs =listenerService.recommendSongs(currentAccount.getAccountId());
+    ui->songsListWidget->clear();
+    for(int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        ui->songsListWidget->addItem(QString::fromStdString(songs[i].getName()));
+    }
+    if(songs.empty())
+    {
+        QMessageBox::information(
+            this,
+            "Recommendation",
+            "No song recommendations found.");
+
+        return;
+    }
+}
+
+
+void ListenerWindow::on_showAllSongsButton_clicked()
+{
+    ui->songsListWidget->clear();
+
+    vector<Song> songs = listenerService.getAllSongs();
+
+    for (int i = 0; i < static_cast<int>(songs.size()); i++)
+    {
+        ui->songsListWidget->addItem(
+            QString::fromStdString(songs[i].getName()));
+    }
+}
+

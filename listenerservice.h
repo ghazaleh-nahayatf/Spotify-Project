@@ -53,6 +53,8 @@ public:
     Listener getListener(int listenerId);
 
     bool editProfile(const Listener& listener);
+
+    vector<Song> recommendSongs(int listenerId);
 };
 
 #endif // LISTENERSERVICE_H
